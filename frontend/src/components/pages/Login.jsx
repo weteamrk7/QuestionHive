@@ -1,9 +1,20 @@
-import React from 'react'
+import React, { useEffect } from 'react';
+import { useAuth0 } from '@auth0/auth0-react';
+import { useNavigate } from 'react-router-dom';
 
 function Login() {
-  return (
-    <div>Login</div>
-  )
+  const { loginWithRedirect, isAuthenticated } = useAuth0();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      navigate('/dashboard');
+    } else {
+      loginWithRedirect();
+    }
+  }, [isAuthenticated, loginWithRedirect, navigate]);
+
+  return <div>Redirecting to login...</div>;
 }
 
-export default Login
+export default Login;

@@ -6,6 +6,7 @@ import { Link as ScrollLink } from 'react-scroll';
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
 import { Menu } from "lucide-react"
 import { Link } from 'react-router-dom';
+import { useAuth0 } from '@auth0/auth0-react';
 
 const ExamManagementLandingPage = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -38,6 +39,8 @@ const ExamManagementLandingPage = () => {
     </ScrollLink>
   );
 
+  const { isAuthenticated, loginWithRedirect, logout, user } = useAuth0();
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-blue-600 to-indigo-900 text-white">
       <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
@@ -60,20 +63,54 @@ const ExamManagementLandingPage = () => {
             <NavItem to="contact" isScrolled={isScrolled}>Contact Us</NavItem>
           </div>
           <div className="hidden md:flex space-x-4">
-            <Link to="/signup">
-              <Button variant="outline" size="lg" className={`font-semibold ${
-                isScrolled 
-                  ? 'text-blue-600 border-blue-600 hover:bg-blue-600 hover:text-white' 
-                  : 'text-white border-white hover:bg-white hover:text-blue-600 bg-blue-600/30'
-              }`}>Sign Up</Button>
-            </Link>
-            <Link to="/login">
-              <Button size="lg" className={`font-semibold ${
-                isScrolled
-                  ? 'bg-blue-600 text-white hover:bg-blue-700'
-                  : 'bg-white text-blue-600 hover:bg-blue-100'
-              }`}>Login</Button>
-            </Link>
+            {isAuthenticated ? (
+              <>
+                <Link to="/profile">
+                  <Button variant="outline" size="lg" className={`font-semibold ${
+                    isScrolled 
+                      ? 'text-blue-600 border-blue-600 hover:bg-blue-600 hover:text-white' 
+                      : 'text-white border-white hover:bg-white hover:text-blue-600 bg-blue-600/30'
+                  }`}>Profile</Button>
+                </Link>
+                <Button 
+                  size="lg" 
+                  className={`font-semibold ${
+                    isScrolled
+                      ? 'bg-blue-600 text-white hover:bg-blue-700'
+                      : 'bg-white text-blue-600 hover:bg-blue-100'
+                  }`}
+                  onClick={() => logout({ returnTo: window.location.origin })}
+                >
+                  Logout
+                </Button>
+              </>
+            ) : (
+              <>
+                <Button 
+                  variant="outline" 
+                  size="lg" 
+                  className={`font-semibold ${
+                    isScrolled 
+                      ? 'text-blue-600 border-blue-600 hover:bg-blue-600 hover:text-white' 
+                      : 'text-white border-white hover:bg-white hover:text-blue-600 bg-blue-600/30'
+                  }`}
+                  onClick={() => loginWithRedirect({ screen_hint: 'signup' })}
+                >
+                  Sign Up
+                </Button>
+                <Button 
+                  size="lg" 
+                  className={`font-semibold ${
+                    isScrolled
+                      ? 'bg-blue-600 text-white hover:bg-blue-700'
+                      : 'bg-white text-blue-600 hover:bg-blue-100'
+                  }`}
+                  onClick={() => loginWithRedirect()}
+                >
+                  Login
+                </Button>
+              </>
+            )}
           </div>
           <Sheet open={isMenuOpen} onOpenChange={setIsMenuOpen}>
             <SheetTrigger asChild className="md:hidden">
@@ -88,20 +125,54 @@ const ExamManagementLandingPage = () => {
                 <NavItem to="exams" isScrolled={isScrolled}>Exams</NavItem>
                 <NavItem to="pricing" isScrolled={isScrolled}>Pricing</NavItem>
                 <NavItem to="contact" isScrolled={isScrolled}>Contact Us</NavItem>
-                <Link to="/signup" onClick={closeMenu}>
-                  <Button variant="outline" size="lg" className={`font-semibold w-full ${
-                    isScrolled 
-                      ? 'text-blue-600 border-blue-600 hover:bg-blue-600 hover:text-white' 
-                      : 'text-white border-white hover:bg-white hover:text-blue-600 bg-blue-600/30'
-                  }`}>Sign Up</Button>
-                </Link>
-                <Link to="/login" onClick={closeMenu}>
-                  <Button size="lg" className={`font-semibold w-full ${
-                    isScrolled
-                      ? 'bg-blue-600 text-white hover:bg-blue-700'
-                      : 'bg-white text-blue-600 hover:bg-blue-100'
-                  }`}>Login</Button>
-                </Link>
+                {isAuthenticated ? (
+                  <>
+                    <Link to="/profile" onClick={closeMenu}>
+                      <Button variant="outline" size="lg" className={`font-semibold w-full ${
+                        isScrolled 
+                          ? 'text-blue-600 border-blue-600 hover:bg-blue-600 hover:text-white' 
+                          : 'text-white border-white hover:bg-white hover:text-blue-600 bg-blue-600/30'
+                      }`}>Profile</Button>
+                    </Link>
+                    <Button 
+                      size="lg" 
+                      className={`font-semibold w-full ${
+                        isScrolled
+                          ? 'bg-blue-600 text-white hover:bg-blue-700'
+                          : 'bg-white text-blue-600 hover:bg-blue-100'
+                      }`}
+                      onClick={() => logout({ returnTo: window.location.origin })}
+                    >
+                      Logout
+                    </Button>
+                  </>
+                ) : (
+                  <>
+                    <Button 
+                      variant="outline" 
+                      size="lg" 
+                      className={`font-semibold w-full ${
+                        isScrolled 
+                          ? 'text-blue-600 border-blue-600 hover:bg-blue-600 hover:text-white' 
+                          : 'text-white border-white hover:bg-white hover:text-blue-600 bg-blue-600/30'
+                      }`}
+                      onClick={() => loginWithRedirect({ screen_hint: 'signup' })}
+                    >
+                      Sign Up
+                    </Button>
+                    <Button 
+                      size="lg" 
+                      className={`font-semibold w-full ${
+                        isScrolled
+                          ? 'bg-blue-600 text-white hover:bg-blue-700'
+                          : 'bg-white text-blue-600 hover:bg-blue-100'
+                      }`}
+                      onClick={() => loginWithRedirect()}
+                    >
+                      Login
+                    </Button>
+                  </>
+                )}
               </nav>
             </SheetContent>
           </Sheet>
@@ -215,10 +286,10 @@ const ExamManagementLandingPage = () => {
             <h2 className="text-4xl md:text-5xl font-bold mb-16 text-center">Create Exams in 4 Simple Steps</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
               {[
-                { step: "1", title: "Select Questions", description: "Choose from our vast question bank or create your own." },
-                { step: "2", title: "Customize", description: "Tailor questions and add your personal touch." },
-                { step: "3", title: "Organize", description: "Structure your exam with our intuitive drag-and-drop interface." },
-                { step: "4", title: "Export & Share", description: "Generate professional PDFs and distribute with ease." }
+                { step: "1️⃣", title: "Select Questions", description: "Choose from our vast question bank or create your own." },
+                { step: "2️⃣", title: "Customize", description: "Tailor questions and add your personal touch." },
+                { step: "3️⃣", title: "Organize", description: "Structure your exam with our intuitive drag-and-drop interface." },
+                { step: "4️⃣", title: "Export & Share", description: "Generate professional PDFs and distribute with ease." }
               ].map((step, index) => (
                 <motion.div 
                   key={index}
