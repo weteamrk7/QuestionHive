@@ -5,7 +5,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Link as ScrollLink } from 'react-scroll';
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
 import { Menu } from "lucide-react"
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useAuth0 } from '@auth0/auth0-react';
 
 const ExamManagementLandingPage = () => {
@@ -40,6 +40,13 @@ const ExamManagementLandingPage = () => {
   );
 
   const { isAuthenticated, loginWithRedirect, logout, user } = useAuth0();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      navigate('/dashboard');
+    }
+  }, [isAuthenticated, navigate]);
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-blue-600 to-indigo-900 text-white">
@@ -57,8 +64,8 @@ const ExamManagementLandingPage = () => {
           </motion.div>
           <div className="hidden md:flex space-x-8">
             <NavItem to="features" isScrolled={isScrolled}>Features</NavItem>
-            <NavItem to="workflow" isScrolled={isScrolled}>Workflow</NavItem>
             <NavItem to="exams" isScrolled={isScrolled}>Exams</NavItem>
+            <NavItem to="workflow" isScrolled={isScrolled}>Workflow</NavItem>
             <NavItem to="pricing" isScrolled={isScrolled}>Pricing</NavItem>
             <NavItem to="contact" isScrolled={isScrolled}>Contact Us</NavItem>
           </div>

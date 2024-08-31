@@ -10,7 +10,10 @@ function SignUp() {
     if (isAuthenticated) {
       navigate('/dashboard');
     } else {
-      loginWithRedirect({ screen_hint: 'signup' });
+      loginWithRedirect({
+        screen_hint: 'signup',
+        appState: { returnTo: '/dashboard' }
+      });
     }
   }, [isAuthenticated, loginWithRedirect, navigate]);
 

@@ -10,7 +10,9 @@ function Login() {
     if (isAuthenticated) {
       navigate('/dashboard');
     } else {
-      loginWithRedirect();
+      loginWithRedirect({
+        appState: { returnTo: '/dashboard' }
+      });
     }
   }, [isAuthenticated, loginWithRedirect, navigate]);
 
