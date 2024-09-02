@@ -37,6 +37,10 @@ export default function HomePage() {
     navigate('/profile');
   }
 
+  const handleCreateExam = () => {
+    navigate('/exam');
+  }
+
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Header */}
@@ -44,7 +48,13 @@ export default function HomePage() {
         <div className="container mx-auto px-4 py-4 flex justify-between items-center">
           <h1 className="text-2xl font-bold text-blue-700 hover:text-blue-800 transition-colors duration-300">MyKagada</h1>
           <div className="flex items-center space-x-4">
-            <Button variant="outline" className="text-blue-600 border-blue-600 hover:bg-blue-50 transition-colors duration-300">Create Exam</Button>
+            <Button 
+              variant="outline" 
+              className="text-blue-600 border-blue-600 hover:bg-blue-50 transition-colors duration-300"
+              onClick={handleCreateExam}
+            >
+              Create Exam
+            </Button>
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <Button variant="ghost" size="icon" className="rounded-full hover:bg-blue-50 transition-colors duration-300">
@@ -76,6 +86,7 @@ export default function HomePage() {
             <Button 
               size="lg" 
               className="bg-blue-600 text-white hover:bg-blue-700 transition-all duration-300 transform hover:scale-105"
+              onClick={handleCreateExam}
             >
               <PlusCircle className="mr-2 h-5 w-5" />
               Create a New Exam
@@ -133,7 +144,11 @@ export default function HomePage() {
             </CardHeader>
             <CardContent>
               <p className="mb-4">Start creating a new exam with our intuitive exam builder.</p>
-              <Button variant="secondary" className="bg-white text-blue-600 hover:bg-blue-50 transition-colors duration-300">
+              <Button 
+                variant="secondary" 
+                className="bg-white text-blue-600 hover:bg-blue-50 transition-colors duration-300"
+                onClick={handleCreateExam}
+              >
                 <PlusCircle className="mr-2 h-4 w-4" />
                 Start Creating
               </Button>

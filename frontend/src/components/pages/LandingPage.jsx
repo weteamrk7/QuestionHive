@@ -188,23 +188,41 @@ const ExamManagementLandingPage = () => {
 
       <main className="pt-20">
         {/* Hero Section */}
-        <section className="py-20 md:py-32 relative overflow-hidden">
-          <div className="container mx-auto px-6 flex flex-col md:flex-row items-center">
+        <section className="py-12 md:py-20 lg:py-32 relative overflow-hidden">
+          <div className="container mx-auto px-4 sm:px-6 flex flex-col md:flex-row items-center">
             <motion.div 
-              className="md:w-1/2 mb-12 md:mb-0"
+              className="w-full md:w-1/2 mb-8 md:mb-0"
               initial={{ opacity: 0, x: -50 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.5 }}
             >
-              <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight">Create and Manage Exams with Ease</h1>
-              <p className="text-2xl mb-10 text-blue-200">Empower your teaching with our intuitive exam platform. Create, organize, and distribute MCQs effortlessly.</p>
-              <div className="space-x-6">
-                <Button size="lg" className="bg-yellow-400 text-blue-900 hover:bg-yellow-300 text-xl px-8 py-4 font-bold shadow-lg">Get Started</Button>
-                <Button variant="outline" size="lg" className="text-white border-white hover:bg-white hover:text-blue-600 text-xl px-8 py-4 font-semibold bg-blue-600/30">Learn More</Button>
+              <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight">Create and Manage Exams with Ease</h1>
+              <p className="text-xl sm:text-2xl mb-8 text-blue-200">Empower your teaching with our intuitive exam platform. Create, organize, and distribute MCQs effortlessly.</p>
+              <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
+                <Button 
+                  size="lg" 
+                  className="bg-yellow-400 text-blue-900 hover:bg-yellow-300 text-lg sm:text-xl px-6 sm:px-8 py-3 sm:py-4 font-bold shadow-lg w-full sm:w-auto"
+                  onClick={() => loginWithRedirect({ screen_hint: 'signup' })}
+                >
+                  Get Started
+                </Button>
+                <Button 
+                  variant="outline" 
+                  size="lg" 
+                  className="text-white border-white hover:bg-white hover:text-blue-600 text-lg sm:text-xl px-6 sm:px-8 py-3 sm:py-4 font-semibold bg-blue-600/30 w-full sm:w-auto"
+                  onClick={() => {
+                    const contactSection = document.getElementById('contact');
+                    if (contactSection) {
+                      contactSection.scrollIntoView({ behavior: 'smooth' });
+                    }
+                  }}
+                >
+                  Learn More
+                </Button>
               </div>
             </motion.div>
             <motion.div 
-              className="md:w-1/2"
+              className="w-full md:w-1/2 mt-8 md:mt-0"
               initial={{ opacity: 0, x: 50 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.5 }}
@@ -227,10 +245,10 @@ const ExamManagementLandingPage = () => {
         </section>
 
         {/* Key Features */}
-        <section id="features" className="py-20 bg-white text-blue-900">
-          <div className="container mx-auto px-6">
-            <h2 className="text-4xl md:text-5xl font-bold mb-16 text-center">Streamline Your Exam Creation</h2>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+        <section id="features" className="py-16 md:py-20 bg-white text-blue-900">
+          <div className="container mx-auto px-4 sm:px-6">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-12 text-center">Streamline Your Exam Creation</h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {[
                 { title: "Comprehensive Question Bank", icon: "📚", description: "Access thousands of pre-made MCQs across various subjects." },
                 { title: "Custom Question Creator", icon: "✏️", description: "Design your own unique questions with our intuitive editor." },
@@ -258,10 +276,10 @@ const ExamManagementLandingPage = () => {
         </section>
 
         {/* Exam Types */}
-        <section id="exams" className="py-20 bg-gray-100 text-blue-900">
-          <div className="container mx-auto px-6">
-            <h2 className="text-4xl md:text-5xl font-bold mb-16 text-center">Exams We Support</h2>
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8">
+        <section id="exams" className="py-16 md:py-20 bg-gray-100 text-blue-900">
+          <div className="container mx-auto px-4 sm:px-6">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-12 text-center">Exams We Support</h2>
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-6">
               {[
                 { name: "JEE", icon: "🎓" },
                 { name: "KCET", icon: "📚" },
@@ -288,10 +306,10 @@ const ExamManagementLandingPage = () => {
         </section>
 
         {/* Workflow */}
-        <section id="workflow" className="py-20 bg-gradient-to-r from-purple-700 to-indigo-800 text-white">
-          <div className="container mx-auto px-6">
-            <h2 className="text-4xl md:text-5xl font-bold mb-16 text-center">Create Exams in 4 Simple Steps</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <section id="workflow" className="py-16 md:py-20 bg-gradient-to-r from-purple-700 to-indigo-800 text-white">
+          <div className="container mx-auto px-4 sm:px-6">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-12 text-center">Create Exams in 4 Simple Steps</h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
               {[
                 { step: "1️⃣", title: "Select Questions", description: "Choose from our vast question bank or create your own." },
                 { step: "2️⃣", title: "Customize", description: "Tailor questions and add your personal touch." },
@@ -320,9 +338,9 @@ const ExamManagementLandingPage = () => {
         </section>
 
         {/* Pricing */}
-        <section id="pricing" className="py-20 bg-gray-100 text-blue-900">
-          <div className="container mx-auto px-6">
-            <h2 className="text-4xl md:text-5xl font-bold mb-16 text-center">Choose Your Perfect Plan</h2>
+        <section id="pricing" className="py-16 md:py-20 bg-gray-100 text-blue-900">
+          <div className="container mx-auto px-4 sm:px-6">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-12 text-center">Choose Your Perfect Plan</h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               {[
                 { title: "Basic", price: "$9", period: "mo", features: ["100 question bank access", "10 custom questions/month", "5 exams/month", "PDF export"] },
@@ -369,17 +387,17 @@ const ExamManagementLandingPage = () => {
         </section>
 
         {/* Contact Us */}
-        <section id="contact" className="py-20 bg-gray-200 text-blue-900">
-          <div className="container mx-auto px-6">
-            <h2 className="text-4xl md:text-5xl font-bold mb-16 text-center">Contact Us</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <section id="contact" className="py-16 md:py-20 bg-gray-200 text-blue-900">
+          <div className="container mx-auto px-4 sm:px-6">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-12 text-center">Contact Us</h2>
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
               <div>
                 <h3 className="text-2xl font-semibold mb-4">Reach Out to Us</h3>
                 <p className="text-lg mb-4">We are here to help you with any questions or support you need.</p>
                 <p className="text-lg mb-2"><strong>Email:</strong> support@exampro.com</p>
                 <p className="text-lg mb-2"><strong>Phone:</strong> +1 234 567 890</p>
-                <p className="text-lg"><strong>Address:</strong> Benagluru, India</p>
-                <div className="mt-6">
+                <p className="text-lg"><strong>Address:</strong> Bengaluru, India</p>
+                <div className="mt-8">
                   <h3 className="text-2xl font-semibold mb-4">Follow Us</h3>
                   <div className="flex space-x-4">
                     <a href="#" className="text-blue-600 hover:text-blue-800 transition">
@@ -420,7 +438,7 @@ const ExamManagementLandingPage = () => {
                     <label className="block text-lg mb-2" htmlFor="message">Message</label>
                     <textarea className="w-full px-4 py-2 border border-gray-300 rounded-lg" id="message" name="message" rows="4" required></textarea>
                   </div>
-                  <Button type="submit" className="bg-blue-600 text-white hover:bg-blue-700 font-semibold py-2 px-4 rounded-lg">Send Message</Button>
+                  <Button type="submit" className="bg-blue-600 text-white hover:bg-blue-700 font-semibold py-2 px-4 rounded-lg w-full sm:w-auto">Send Message</Button>
                 </form>
               </div>
             </div>
@@ -429,7 +447,7 @@ const ExamManagementLandingPage = () => {
       </main>
 
       <footer className="bg-blue-900 text-white py-12">
-        <div className="container mx-auto px-6">
+        <div className="container mx-auto px-4 sm:px-6">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
             <div>
               <h3 className="text-xl font-semibold mb-4">Company</h3>
