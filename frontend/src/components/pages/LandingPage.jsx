@@ -394,7 +394,7 @@ const ExamManagementLandingPage = () => {
               <div>
                 <h3 className="text-2xl font-semibold mb-4">Reach Out to Us</h3>
                 <p className="text-lg mb-4">We are here to help you with any questions or support you need.</p>
-                <p className="text-lg mb-2"><strong>Email:</strong> support@exampro.com</p>
+                <p className="text-lg mb-2"><strong>Email:</strong> support@MyKagada.com</p>
                 <p className="text-lg mb-2"><strong>Phone:</strong> +1 234 567 890</p>
                 <p className="text-lg"><strong>Address:</strong> Bengaluru, India</p>
                 <div className="mt-8">
@@ -483,7 +483,7 @@ const ExamManagementLandingPage = () => {
             </div>
           </div>
           <div className="mt-12 pt-8 border-t border-blue-800 text-center">
-            <p>&copy; 2024 ExamPro. All rights reserved.</p>
+            <p>&copy; 2024 MyKagada. All rights reserved.</p>
           </div>
         </div>
       </footer>
