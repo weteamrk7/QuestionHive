@@ -1,53 +1,41 @@
 export const NEETQuestions = {
   Physics: {
-    easy: [
-      { id: 1, text: 'NEET Physics Easy Question 1' },
-      { id: 2, text: 'NEET Physics Easy Question 2' },
-      // Add more questions
+    "Mechanics": [
+      { id: 1, text: 'NEET Physics Mechanics Easy Question 1', difficulty: 'easy', options: ['Option A', 'Option B', 'Option C', 'Option D'], answer: 'Option B' },
+      { id: 2, text: 'NEET Physics Mechanics Medium Question 1', difficulty: 'medium', options: ['Option A', 'Option B', 'Option C', 'Option D'], answer: 'Option C' },
+      { id: 3, text: 'NEET Physics Mechanics Hard Question 1', difficulty: 'hard', options: ['Option A', 'Option B', 'Option C', 'Option D'], answer: 'Option A' },
     ],
-    medium: [
-      { id: 1, text: 'NEET Physics Medium Question 1' },
-      { id: 2, text: 'NEET Physics Medium Question 2' },
-      // Add more questions
+    "Thermodynamics": [
+      { id: 4, text: 'NEET Physics Thermodynamics Easy Question 1', difficulty: 'easy', options: ['Option A', 'Option B', 'Option C', 'Option D'], answer: 'Option D' },
+      { id: 5, text: 'NEET Physics Thermodynamics Medium Question 1', difficulty: 'medium', options: ['Option A', 'Option B', 'Option C', 'Option D'], answer: 'Option B' },
+      { id: 6, text: 'NEET Physics Thermodynamics Hard Question 1', difficulty: 'hard', options: ['Option A', 'Option B', 'Option C', 'Option D'], answer: 'Option C' },
     ],
-    hard: [
-      { id: 1, text: 'NEET Physics Hard Question 1' },
-      { id: 2, text: 'NEET Physics Hard Question 2' },
-      // Add more questions
-    ],
+    // Add more chapters
   },
   Chemistry: {
-    easy: [
-      { id: 1, text: 'NEET Chemistry Easy Question 1' },
-      { id: 2, text: 'NEET Chemistry Easy Question 2' },
-      // Add more questions
+    "Organic Chemistry": [
+      { id: 1, text: 'NEET Chemistry Organic Easy Question 1', difficulty: 'easy', options: ['Option A', 'Option B', 'Option C', 'Option D'], answer: 'Option A' },
+      { id: 2, text: 'NEET Chemistry Organic Medium Question 1', difficulty: 'medium', options: ['Option A', 'Option B', 'Option C', 'Option D'], answer: 'Option D' },
+      { id: 3, text: 'NEET Chemistry Organic Hard Question 1', difficulty: 'hard', options: ['Option A', 'Option B', 'Option C', 'Option D'], answer: 'Option B' },
     ],
-    medium: [
-      { id: 1, text: 'NEET Chemistry Medium Question 1' },
-      { id: 2, text: 'NEET Chemistry Medium Question 2' },
-      // Add more questions
+    "Inorganic Chemistry": [
+      { id: 4, text: 'NEET Chemistry Inorganic Easy Question 1', difficulty: 'easy', options: ['Option A', 'Option B', 'Option C', 'Option D'], answer: 'Option C' },
+      { id: 5, text: 'NEET Chemistry Inorganic Medium Question 1', difficulty: 'medium', options: ['Option A', 'Option B', 'Option C', 'Option D'], answer: 'Option A' },
+      { id: 6, text: 'NEET Chemistry Inorganic Hard Question 1', difficulty: 'hard', options: ['Option A', 'Option B', 'Option C', 'Option D'], answer: 'Option D' },
     ],
-    hard: [
-      { id: 1, text: 'NEET Chemistry Hard Question 1' },
-      { id: 2, text: 'NEET Chemistry Hard Question 2' },
-      // Add more questions
-    ],
+    // Add more chapters
   },
   Biology: {
-    easy: [
-      { id: 1, text: 'NEET Biology Easy Question 1' },
-      { id: 2, text: 'NEET Biology Easy Question 2' },
-      // Add more questions
+    "Human Physiology": [
+      { id: 1, text: 'NEET Biology Physiology Easy Question 1', difficulty: 'easy', options: ['Option A', 'Option B', 'Option C', 'Option D'], answer: 'Option B' },
+      { id: 2, text: 'NEET Biology Physiology Medium Question 1', difficulty: 'medium', options: ['Option A', 'Option B', 'Option C', 'Option D'], answer: 'Option C' },
+      { id: 3, text: 'NEET Biology Physiology Hard Question 1', difficulty: 'hard', options: ['Option A', 'Option B', 'Option C', 'Option D'], answer: 'Option A' },
     ],
-    medium: [
-      { id: 1, text: 'NEET Biology Medium Question 1' },
-      { id: 2, text: 'NEET Biology Medium Question 2' },
-      // Add more questions
+    "Genetics": [
+      { id: 4, text: 'NEET Biology Genetics Easy Question 1', difficulty: 'easy', options: ['Option A', 'Option B', 'Option C', 'Option D'], answer: 'Option D' },
+      { id: 5, text: 'NEET Biology Genetics Medium Question 1', difficulty: 'medium', options: ['Option A', 'Option B', 'Option C', 'Option D'], answer: 'Option B' },
+      { id: 6, text: 'NEET Biology Genetics Hard Question 1', difficulty: 'hard', options: ['Option A', 'Option B', 'Option C', 'Option D'], answer: 'Option C' },
     ],
-    hard: [
-      { id: 1, text: 'NEET Biology Hard Question 1' },
-      { id: 2, text: 'NEET Biology Hard Question 2' },
-      // Add more questions
-    ],
+    // Add more chapters
   },
 };

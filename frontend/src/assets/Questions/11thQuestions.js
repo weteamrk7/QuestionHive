@@ -1,87 +1,66 @@
 export const EleventhQuestions = {
   Physics: {
-    easy: [
-      { id: 1, text: '11th Physics Easy Question 1' },
-      { id: 2, text: '11th Physics Easy Question 2' },
-      // Add more questions
+    "Motion in a Plane": [
+      { id: 1, text: '11th Physics Motion Easy Question 1', difficulty: 'easy', options: ['Option A', 'Option B', 'Option C', 'Option D'], answer: 'Option B' },
+      { id: 2, text: '11th Physics Motion Medium Question 1', difficulty: 'medium', options: ['Option A', 'Option B', 'Option C', 'Option D'], answer: 'Option C' },
+      { id: 3, text: '11th Physics Motion Hard Question 1', difficulty: 'hard', options: ['Option A', 'Option B', 'Option C', 'Option D'], answer: 'Option A' },
     ],
-    medium: [
-      { id: 1, text: '11th Physics Medium Question 1' },
-      { id: 2, text: '11th Physics Medium Question 2' },
-      // Add more questions
+    "Laws of Motion": [
+      { id: 4, text: '11th Physics Laws Easy Question 1', difficulty: 'easy', options: ['Option A', 'Option B', 'Option C', 'Option D'], answer: 'Option D' },
+      { id: 5, text: '11th Physics Laws Medium Question 1', difficulty: 'medium', options: ['Option A', 'Option B', 'Option C', 'Option D'], answer: 'Option B' },
+      { id: 6, text: '11th Physics Laws Hard Question 1', difficulty: 'hard', options: ['Option A', 'Option B', 'Option C', 'Option D'], answer: 'Option C' },
     ],
-    hard: [
-      { id: 1, text: '11th Physics Hard Question 1' },
-      { id: 2, text: '11th Physics Hard Question 2' },
-      // Add more questions
-    ],
+    // Add more chapters
   },
   Chemistry: {
-    easy: [
-      { id: 1, text: '11th Chemistry Easy Question 1' },
-      { id: 2, text: '11th Chemistry Easy Question 2' },
-      // Add more questions
+    "Some Basic Concepts of Chemistry": [
+      { id: 1, text: '11th Chemistry Basics Easy Question 1', difficulty: 'easy', options: ['Option A', 'Option B', 'Option C', 'Option D'], answer: 'Option A' },
+      { id: 2, text: '11th Chemistry Basics Medium Question 1', difficulty: 'medium', options: ['Option A', 'Option B', 'Option C', 'Option D'], answer: 'Option D' },
+      { id: 3, text: '11th Chemistry Basics Hard Question 1', difficulty: 'hard', options: ['Option A', 'Option B', 'Option C', 'Option D'], answer: 'Option B' },
     ],
-    medium: [
-      { id: 1, text: '11th Chemistry Medium Question 1' },
-      { id: 2, text: '11th Chemistry Medium Question 2' },
-      // Add more questions
+    "Structure of Atom": [
+      { id: 4, text: '11th Chemistry Atom Easy Question 1', difficulty: 'easy', options: ['Option A', 'Option B', 'Option C', 'Option D'], answer: 'Option C' },
+      { id: 5, text: '11th Chemistry Atom Medium Question 1', difficulty: 'medium', options: ['Option A', 'Option B', 'Option C', 'Option D'], answer: 'Option A' },
+      { id: 6, text: '11th Chemistry Atom Hard Question 1', difficulty: 'hard', options: ['Option A', 'Option B', 'Option C', 'Option D'], answer: 'Option D' },
     ],
-    hard: [
-      { id: 1, text: '11th Chemistry Hard Question 1' },
-      { id: 2, text: '11th Chemistry Hard Question 2' },
-      // Add more questions
-    ],
+    // Add more chapters
   },
   Mathematics: {
-    easy: [
-      { id: 1, text: '11th Mathematics Easy Question 1' },
-      { id: 2, text: '11th Mathematics Easy Question 2' },
-      // Add more questions
+    "Sets": [
+      { id: 1, text: '11th Mathematics Sets Easy Question 1', difficulty: 'easy', options: ['Option A', 'Option B', 'Option C', 'Option D'], answer: 'Option B' },
+      { id: 2, text: '11th Mathematics Sets Medium Question 1', difficulty: 'medium', options: ['Option A', 'Option B', 'Option C', 'Option D'], answer: 'Option C' },
+      { id: 3, text: '11th Mathematics Sets Hard Question 1', difficulty: 'hard', options: ['Option A', 'Option B', 'Option C', 'Option D'], answer: 'Option A' },
     ],
-    medium: [
-      { id: 1, text: '11th Mathematics Medium Question 1' },
-      { id: 2, text: '11th Mathematics Medium Question 2' },
-      // Add more questions
+    "Relations and Functions": [
+      { id: 4, text: '11th Mathematics Functions Easy Question 1', difficulty: 'easy', options: ['Option A', 'Option B', 'Option C', 'Option D'], answer: 'Option D' },
+      { id: 5, text: '11th Mathematics Functions Medium Question 1', difficulty: 'medium', options: ['Option A', 'Option B', 'Option C', 'Option D'], answer: 'Option B' },
+      { id: 6, text: '11th Mathematics Functions Hard Question 1', difficulty: 'hard', options: ['Option A', 'Option B', 'Option C', 'Option D'], answer: 'Option C' },
     ],
-    hard: [
-      { id: 1, text: '11th Mathematics Hard Question 1' },
-      { id: 2, text: '11th Mathematics Hard Question 2' },
-      // Add more questions
-    ],
+    // Add more chapters
   },
   Biology: {
-    easy: [
-      { id: 1, text: '11th Biology Easy Question 1' },
-      { id: 2, text: '11th Biology Easy Question 2' },
-      // Add more questions
+    "Diversity in Living World": [
+      { id: 1, text: '11th Biology Diversity Easy Question 1', difficulty: 'easy', options: ['Option A', 'Option B', 'Option C', 'Option D'], answer: 'Option B' },
+      { id: 2, text: '11th Biology Diversity Medium Question 1', difficulty: 'medium', options: ['Option A', 'Option B', 'Option C', 'Option D'], answer: 'Option C' },
+      { id: 3, text: '11th Biology Diversity Hard Question 1', difficulty: 'hard', options: ['Option A', 'Option B', 'Option C', 'Option D'], answer: 'Option A' },
     ],
-    medium: [
-      { id: 1, text: '11th Biology Medium Question 1' },
-      { id: 2, text: '11th Biology Medium Question 2' },
-      // Add more questions
+    "Plant Kingdom": [
+      { id: 4, text: '11th Biology Plants Easy Question 1', difficulty: 'easy', options: ['Option A', 'Option B', 'Option C', 'Option D'], answer: 'Option D' },
+      { id: 5, text: '11th Biology Plants Medium Question 1', difficulty: 'medium', options: ['Option A', 'Option B', 'Option C', 'Option D'], answer: 'Option B' },
+      { id: 6, text: '11th Biology Plants Hard Question 1', difficulty: 'hard', options: ['Option A', 'Option B', 'Option C', 'Option D'], answer: 'Option C' },
     ],
-    hard: [
-      { id: 1, text: '11th Biology Hard Question 1' },
-      { id: 2, text: '11th Biology Hard Question 2' },
-      // Add more questions
-    ],
+    // Add more chapters
   },
   English: {
-    easy: [
-      { id: 1, text: '11th English Easy Question 1' },
-      { id: 2, text: '11th English Easy Question 2' },
-      // Add more questions
+    "Reading Comprehension": [
+      { id: 1, text: '11th English Reading Easy Question 1', difficulty: 'easy', options: ['Option A', 'Option B', 'Option C', 'Option D'], answer: 'Option B' },
+      { id: 2, text: '11th English Reading Medium Question 1', difficulty: 'medium', options: ['Option A', 'Option B', 'Option C', 'Option D'], answer: 'Option C' },
+      { id: 3, text: '11th English Reading Hard Question 1', difficulty: 'hard', options: ['Option A', 'Option B', 'Option C', 'Option D'], answer: 'Option A' },
     ],
-    medium: [
-      { id: 1, text: '11th English Medium Question 1' },
-      { id: 2, text: '11th English Medium Question 2' },
-      // Add more questions
-    ],
-    hard: [
-      { id: 1, text: '11th English Hard Question 1' },
-      { id: 2, text: '11th English Hard Question 2' },
-      // Add more questions
+    "Grammar": [
+      { id: 4, text: '11th English Grammar Easy Question 1', difficulty: 'easy', options: ['Option A', 'Option B', 'Option C', 'Option D'], answer: 'Option D' },
+      { id: 5, text: '11th English Grammar Medium Question 1', difficulty: 'medium', options: ['Option A', 'Option B', 'Option C', 'Option D'], answer: 'Option B' },
+      { id: 6, text: '11th English Grammar Hard Question 1', difficulty: 'hard', options: ['Option A', 'Option B', 'Option C', 'Option D'], answer: 'Option C' },
     ],
   },
 };

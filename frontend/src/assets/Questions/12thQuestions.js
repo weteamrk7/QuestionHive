@@ -1,87 +1,67 @@
 export const TwelfthQuestions = {
   Physics: {
-    easy: [
-      { id: 1, text: '12th Physics Easy Question 1' },
-      { id: 2, text: '12th Physics Easy Question 2' },
-      // Add more questions
+    "Electrostatics": [
+      { id: 1, text: '12th Physics Electrostatics Easy Question 1', difficulty: 'easy', options: ['Option A', 'Option B', 'Option C', 'Option D'], answer: 'Option B' },
+      { id: 2, text: '12th Physics Electrostatics Medium Question 1', difficulty: 'medium', options: ['Option A', 'Option B', 'Option C', 'Option D'], answer: 'Option C' },
+      { id: 3, text: '12th Physics Electrostatics Hard Question 1', difficulty: 'hard', options: ['Option A', 'Option B', 'Option C', 'Option D'], answer: 'Option A' },
     ],
-    medium: [
-      { id: 1, text: '12th Physics Medium Question 1' },
-      { id: 2, text: '12th Physics Medium Question 2' },
-      // Add more questions
+    "Magnetism": [
+      { id: 4, text: '12th Physics Magnetism Easy Question 1', difficulty: 'easy', options: ['Option A', 'Option B', 'Option C', 'Option D'], answer: 'Option D' },
+      { id: 5, text: '12th Physics Magnetism Medium Question 1', difficulty: 'medium', options: ['Option A', 'Option B', 'Option C', 'Option D'], answer: 'Option B' },
+      { id: 6, text: '12th Physics Magnetism Hard Question 1', difficulty: 'hard', options: ['Option A', 'Option B', 'Option C', 'Option D'], answer: 'Option C' },
     ],
-    hard: [
-      { id: 1, text: '12th Physics Hard Question 1' },
-      { id: 2, text: '12th Physics Hard Question 2' },
-      // Add more questions
-    ],
+    // Add more chapters
   },
   Chemistry: {
-    easy: [
-      { id: 1, text: '12th Chemistry Easy Question 1' },
-      { id: 2, text: '12th Chemistry Easy Question 2' },
-      // Add more questions
+    "Solid State": [
+      { id: 1, text: '12th Chemistry Solid State Easy Question 1', difficulty: 'easy', options: ['Option A', 'Option B', 'Option C', 'Option D'], answer: 'Option A' },
+      { id: 2, text: '12th Chemistry Solid State Medium Question 1', difficulty: 'medium', options: ['Option A', 'Option B', 'Option C', 'Option D'], answer: 'Option D' },
+      { id: 3, text: '12th Chemistry Solid State Hard Question 1', difficulty: 'hard', options: ['Option A', 'Option B', 'Option C', 'Option D'], answer: 'Option B' },
     ],
-    medium: [
-      { id: 1, text: '12th Chemistry Medium Question 1' },
-      { id: 2, text: '12th Chemistry Medium Question 2' },
-      // Add more questions
+    "Solutions": [
+      { id: 4, text: '12th Chemistry Solutions Easy Question 1', difficulty: 'easy', options: ['Option A', 'Option B', 'Option C', 'Option D'], answer: 'Option C' },
+      { id: 5, text: '12th Chemistry Solutions Medium Question 1', difficulty: 'medium', options: ['Option A', 'Option B', 'Option C', 'Option D'], answer: 'Option A' },
+      { id: 6, text: '12th Chemistry Solutions Hard Question 1', difficulty: 'hard', options: ['Option A', 'Option B', 'Option C', 'Option D'], answer: 'Option D' },
     ],
-    hard: [
-      { id: 1, text: '12th Chemistry Hard Question 1' },
-      { id: 2, text: '12th Chemistry Hard Question 2' },
-      // Add more questions
-    ],
+    // Add more chapters
   },
   Mathematics: {
-    easy: [
-      { id: 1, text: '12th Mathematics Easy Question 1' },
-      { id: 2, text: '12th Mathematics Easy Question 2' },
-      // Add more questions
+    "Matrices": [
+      { id: 1, text: '12th Mathematics Matrices Easy Question 1', difficulty: 'easy', options: ['Option A', 'Option B', 'Option C', 'Option D'], answer: 'Option B' },
+      { id: 2, text: '12th Mathematics Matrices Medium Question 1', difficulty: 'medium', options: ['Option A', 'Option B', 'Option C', 'Option D'], answer: 'Option C' },
+      { id: 3, text: '12th Mathematics Matrices Hard Question 1', difficulty: 'hard', options: ['Option A', 'Option B', 'Option C', 'Option D'], answer: 'Option A' },
     ],
-    medium: [
-      { id: 1, text: '12th Mathematics Medium Question 1' },
-      { id: 2, text: '12th Mathematics Medium Question 2' },
-      // Add more questions
+    "Determinants": [
+      { id: 4, text: '12th Mathematics Determinants Easy Question 1', difficulty: 'easy', options: ['Option A', 'Option B', 'Option C', 'Option D'], answer: 'Option D' },
+      { id: 5, text: '12th Mathematics Determinants Medium Question 1', difficulty: 'medium', options: ['Option A', 'Option B', 'Option C', 'Option D'], answer: 'Option B' },
+      { id: 6, text: '12th Mathematics Determinants Hard Question 1', difficulty: 'hard', options: ['Option A', 'Option B', 'Option C', 'Option D'], answer: 'Option C' },
     ],
-    hard: [
-      { id: 1, text: '12th Mathematics Hard Question 1' },
-      { id: 2, text: '12th Mathematics Hard Question 2' },
-      // Add more questions
-    ],
+    // Add more chapters
   },
   Biology: {
-    easy: [
-      { id: 1, text: '12th Biology Easy Question 1' },
-      { id: 2, text: '12th Biology Easy Question 2' },
-      // Add more questions
+    "Reproduction": [
+      { id: 1, text: '12th Biology Reproduction Easy Question 1', difficulty: 'easy', options: ['Option A', 'Option B', 'Option C', 'Option D'], answer: 'Option B' },
+      { id: 2, text: '12th Biology Reproduction Medium Question 1', difficulty: 'medium', options: ['Option A', 'Option B', 'Option C', 'Option D'], answer: 'Option C' },
+      { id: 3, text: '12th Biology Reproduction Hard Question 1', difficulty: 'hard', options: ['Option A', 'Option B', 'Option C', 'Option D'], answer: 'Option A' },
     ],
-    medium: [
-      { id: 1, text: '12th Biology Medium Question 1' },
-      { id: 2, text: '12th Biology Medium Question 2' },
-      // Add more questions
+    "Genetics": [
+      { id: 4, text: '12th Biology Genetics Easy Question 1', difficulty: 'easy', options: ['Option A', 'Option B', 'Option C', 'Option D'], answer: 'Option D' },
+      { id: 5, text: '12th Biology Genetics Medium Question 1', difficulty: 'medium', options: ['Option A', 'Option B', 'Option C', 'Option D'], answer: 'Option B' },
+      { id: 6, text: '12th Biology Genetics Hard Question 1', difficulty: 'hard', options: ['Option A', 'Option B', 'Option C', 'Option D'], answer: 'Option C' },
     ],
-    hard: [
-      { id: 1, text: '12th Biology Hard Question 1' },
-      { id: 2, text: '12th Biology Hard Question 2' },
-      // Add more questions
-    ],
+    // Add more chapters
   },
   English: {
-    easy: [
-      { id: 1, text: '12th English Easy Question 1' },
-      { id: 2, text: '12th English Easy Question 2' },
-      // Add more questions
+    "Literature": [
+      { id: 1, text: '12th English Literature Easy Question 1', difficulty: 'easy', options: ['Option A', 'Option B', 'Option C', 'Option D'], answer: 'Option B' },
+      { id: 2, text: '12th English Literature Medium Question 1', difficulty: 'medium', options: ['Option A', 'Option B', 'Option C', 'Option D'], answer: 'Option C' },
+      { id: 3, text: '12th English Literature Hard Question 1', difficulty: 'hard', options: ['Option A', 'Option B', 'Option C', 'Option D'], answer: 'Option A' },
     ],
-    medium: [
-      { id: 1, text: '12th English Medium Question 1' },
-      { id: 2, text: '12th English Medium Question 2' },
-      // Add more questions
+    "Writing Skills": [
+      { id: 4, text: '12th English Writing Easy Question 1', difficulty: 'easy', options: ['Option A', 'Option B', 'Option C', 'Option D'], answer: 'Option D' },
+      { id: 5, text: '12th English Writing Medium Question 1', difficulty: 'medium', options: ['Option A', 'Option B', 'Option C', 'Option D'], answer: 'Option B' },
+      { id: 6, text: '12th English Writing Hard Question 1', difficulty: 'hard', options: ['Option A', 'Option B', 'Option C', 'Option D'], answer: 'Option C' },
     ],
-    hard: [
-      { id: 1, text: '12th English Hard Question 1' },
-      { id: 2, text: '12th English Hard Question 2' },
-      // Add more questions
-    ],
+    // Add more chapters
   },
 };

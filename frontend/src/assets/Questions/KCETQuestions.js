@@ -1,70 +1,54 @@
 export const KCETQuestions = {
   Physics: {
-    easy: [
-      { id: 1, text: 'KCET Physics Easy Question 1' },
-      { id: 2, text: 'KCET Physics Easy Question 2' },
-      // Add more questions
+    "Mechanics": [
+      { id: 1, text: 'KCET Physics Mechanics Easy Question 1', difficulty: 'easy', options: ['Option A', 'Option B', 'Option C', 'Option D'], answer: 'Option B' },
+      { id: 2, text: 'KCET Physics Mechanics Medium Question 1', difficulty: 'medium', options: ['Option A', 'Option B', 'Option C', 'Option D'], answer: 'Option C' },
+      { id: 3, text: 'KCET Physics Mechanics Hard Question 1', difficulty: 'hard', options: ['Option A', 'Option B', 'Option C', 'Option D'], answer: 'Option A' },
     ],
-    medium: [
-      { id: 1, text: 'KCET Physics Medium Question 1' },
-      { id: 2, text: 'KCET Physics Medium Question 2' },
-      // Add more questions
+    "Electromagnetism": [
+      { id: 4, text: 'KCET Physics Electromagnetism Easy Question 1', difficulty: 'easy', options: ['Option A', 'Option B', 'Option C', 'Option D'], answer: 'Option D' },
+      { id: 5, text: 'KCET Physics Electromagnetism Medium Question 1', difficulty: 'medium', options: ['Option A', 'Option B', 'Option C', 'Option D'], answer: 'Option B' },
+      { id: 6, text: 'KCET Physics Electromagnetism Hard Question 1', difficulty: 'hard', options: ['Option A', 'Option B', 'Option C', 'Option D'], answer: 'Option C' },
     ],
-    hard: [
-      { id: 1, text: 'KCET Physics Hard Question 1' },
-      { id: 2, text: 'KCET Physics Hard Question 2' },
-      // Add more questions
-    ],
+    // Add more chapters
   },
   Chemistry: {
-    easy: [
-      { id: 1, text: 'KCET Chemistry Easy Question 1' },
-      { id: 2, text: 'KCET Chemistry Easy Question 2' },
-      // Add more questions
+    "Organic Chemistry": [
+      { id: 1, text: 'KCET Chemistry Organic Easy Question 1', difficulty: 'easy', options: ['Option A', 'Option B', 'Option C', 'Option D'], answer: 'Option A' },
+      { id: 2, text: 'KCET Chemistry Organic Medium Question 1', difficulty: 'medium', options: ['Option A', 'Option B', 'Option C', 'Option D'], answer: 'Option D' },
+      { id: 3, text: 'KCET Chemistry Organic Hard Question 1', difficulty: 'hard', options: ['Option A', 'Option B', 'Option C', 'Option D'], answer: 'Option B' },
     ],
-    medium: [
-      { id: 1, text: 'KCET Chemistry Medium Question 1' },
-      { id: 2, text: 'KCET Chemistry Medium Question 2' },
-      // Add more questions
+    "Inorganic Chemistry": [
+      { id: 4, text: 'KCET Chemistry Inorganic Easy Question 1', difficulty: 'easy', options: ['Option A', 'Option B', 'Option C', 'Option D'], answer: 'Option C' },
+      { id: 5, text: 'KCET Chemistry Inorganic Medium Question 1', difficulty: 'medium', options: ['Option A', 'Option B', 'Option C', 'Option D'], answer: 'Option A' },
+      { id: 6, text: 'KCET Chemistry Inorganic Hard Question 1', difficulty: 'hard', options: ['Option A', 'Option B', 'Option C', 'Option D'], answer: 'Option D' },
     ],
-    hard: [
-      { id: 1, text: 'KCET Chemistry Hard Question 1' },
-      { id: 2, text: 'KCET Chemistry Hard Question 2' },
-      // Add more questions
-    ],
+    // Add more chapters
   },
   Mathematics: {
-    easy: [
-      { id: 1, text: 'KCET Mathematics Easy Question 1' },
-      { id: 2, text: 'KCET Mathematics Easy Question 2' },
-      // Add more questions
+    "Calculus": [
+      { id: 1, text: 'KCET Mathematics Calculus Easy Question 1', difficulty: 'easy', options: ['Option A', 'Option B', 'Option C', 'Option D'], answer: 'Option B' },
+      { id: 2, text: 'KCET Mathematics Calculus Medium Question 1', difficulty: 'medium', options: ['Option A', 'Option B', 'Option C', 'Option D'], answer: 'Option C' },
+      { id: 3, text: 'KCET Mathematics Calculus Hard Question 1', difficulty: 'hard', options: ['Option A', 'Option B', 'Option C', 'Option D'], answer: 'Option A' },
     ],
-    medium: [
-      { id: 1, text: 'KCET Mathematics Medium Question 1' },
-      { id: 2, text: 'KCET Mathematics Medium Question 2' },
-      // Add more questions
+    "Linear Algebra": [
+      { id: 4, text: 'KCET Mathematics Linear Algebra Easy Question 1', difficulty: 'easy', options: ['Option A', 'Option B', 'Option C', 'Option D'], answer: 'Option D' },
+      { id: 5, text: 'KCET Mathematics Linear Algebra Medium Question 1', difficulty: 'medium', options: ['Option A', 'Option B', 'Option C', 'Option D'], answer: 'Option B' },
+      { id: 6, text: 'KCET Mathematics Linear Algebra Hard Question 1', difficulty: 'hard', options: ['Option A', 'Option B', 'Option C', 'Option D'], answer: 'Option C' },
     ],
-    hard: [
-      { id: 1, text: 'KCET Mathematics Hard Question 1' },
-      { id: 2, text: 'KCET Mathematics Hard Question 2' },
-      // Add more questions
-    ],
+    // Add more chapters
   },
   Biology: {
-    easy: [
-      { id: 1, text: 'KCET Biology Easy Question 1' },
-      { id: 2, text: 'KCET Biology Easy Question 2' },
-      // Add more questions
+    "Microbiology": [
+      { id: 1, text: 'KCET Biology Microbiology Easy Question 1', difficulty: 'easy', options: ['Option A', 'Option B', 'Option C', 'Option D'], answer: 'Option B' },
+      { id: 2, text: 'KCET Biology Microbiology Medium Question 1', difficulty: 'medium', options: ['Option A', 'Option B', 'Option C', 'Option D'], answer: 'Option C' },
+      { id: 3, text: 'KCET Biology Microbiology Hard Question 1', difficulty: 'hard', options: ['Option A', 'Option B', 'Option C', 'Option D'], answer: 'Option A' },
     ],
-    medium: [
-      { id: 1, text: 'KCET Biology Medium Question 1' },
-      { id: 2, text: 'KCET Biology Medium Question 2' },
-      // Add more questions
+    "Genetics": [
+      { id: 4, text: 'KCET Biology Genetics Easy Question 1', difficulty: 'easy', options: ['Option A', 'Option B', 'Option C', 'Option D'], answer: 'Option D' },
+      { id: 5, text: 'KCET Biology Genetics Medium Question 1', difficulty: 'medium', options: ['Option A', 'Option B', 'Option C', 'Option D'], answer: 'Option B' },
+      { id: 6, text: 'KCET Biology Genetics Hard Question 1', difficulty: 'hard', options: ['Option A', 'Option B', 'Option C', 'Option D'], answer: 'Option C' },
     ],
-    hard: [
-      { id: 1, text: 'KCET Biology Hard Question 1' },
-      { id: 2, text: 'KCET Biology Hard Question 2' },
-      // Add more questions
-    ],
+    // Add more chapters
   },
 };

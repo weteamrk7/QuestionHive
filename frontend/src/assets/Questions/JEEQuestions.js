@@ -1,53 +1,41 @@
 export const JEEQuestions = {
   Physics: {
-    easy: [
-      { id: 1, text: 'JEE Physics Easy Question 1' },
-      { id: 2, text: 'JEE Physics Easy Question 2' },
-      // Add more questions
+    "Mechanics": [
+      { id: 1, text: 'JEE Physics Mechanics Easy Question 1', difficulty: 'easy', options: ['Option A', 'Option B', 'Option C', 'Option D'], answer: 'Option B' },
+      { id: 2, text: 'JEE Physics Mechanics Medium Question 1', difficulty: 'medium', options: ['Option A', 'Option B', 'Option C', 'Option D'], answer: 'Option C' },
+      { id: 3, text: 'JEE Physics Mechanics Hard Question 1', difficulty: 'hard', options: ['Option A', 'Option B', 'Option C', 'Option D'], answer: 'Option A' },
     ],
-    medium: [
-      { id: 1, text: 'JEE Physics Medium Question 1' },
-      { id: 2, text: 'JEE Physics Medium Question 2' },
-      // Add more questions
+    "Thermodynamics": [
+      { id: 4, text: 'JEE Physics Thermodynamics Easy Question 1', difficulty: 'easy', options: ['Option A', 'Option B', 'Option C', 'Option D'], answer: 'Option D' },
+      { id: 5, text: 'JEE Physics Thermodynamics Medium Question 1', difficulty: 'medium', options: ['Option A', 'Option B', 'Option C', 'Option D'], answer: 'Option B' },
+      { id: 6, text: 'JEE Physics Thermodynamics Hard Question 1', difficulty: 'hard', options: ['Option A', 'Option B', 'Option C', 'Option D'], answer: 'Option C' },
     ],
-    hard: [
-      { id: 1, text: 'JEE Physics Hard Question 1' },
-      { id: 2, text: 'JEE Physics Hard Question 2' },
-      // Add more questions
-    ],
+    // Add more chapters
   },
   Chemistry: {
-    easy: [
-      { id: 1, text: 'JEE Chemistry Easy Question 1' },
-      { id: 2, text: 'JEE Chemistry Easy Question 2' },
-      // Add more questions
+    "Organic Chemistry": [
+      { id: 1, text: 'JEE Chemistry Organic Easy Question 1', difficulty: 'easy', options: ['Option A', 'Option B', 'Option C', 'Option D'], answer: 'Option A' },
+      { id: 2, text: 'JEE Chemistry Organic Medium Question 1', difficulty: 'medium', options: ['Option A', 'Option B', 'Option C', 'Option D'], answer: 'Option D' },
+      { id: 3, text: 'JEE Chemistry Organic Hard Question 1', difficulty: 'hard', options: ['Option A', 'Option B', 'Option C', 'Option D'], answer: 'Option B' },
     ],
-    medium: [
-      { id: 1, text: 'JEE Chemistry Medium Question 1' },
-      { id: 2, text: 'JEE Chemistry Medium Question 2' },
-      // Add more questions
+    "Inorganic Chemistry": [
+      { id: 4, text: 'JEE Chemistry Inorganic Easy Question 1', difficulty: 'easy', options: ['Option A', 'Option B', 'Option C', 'Option D'], answer: 'Option C' },
+      { id: 5, text: 'JEE Chemistry Inorganic Medium Question 1', difficulty: 'medium', options: ['Option A', 'Option B', 'Option C', 'Option D'], answer: 'Option A' },
+      { id: 6, text: 'JEE Chemistry Inorganic Hard Question 1', difficulty: 'hard', options: ['Option A', 'Option B', 'Option C', 'Option D'], answer: 'Option D' },
     ],
-    hard: [
-      { id: 1, text: 'JEE Chemistry Hard Question 1' },
-      { id: 2, text: 'JEE Chemistry Hard Question 2' },
-      // Add more questions
-    ],
+    // Add more chapters
   },
   Mathematics: {
-    easy: [
-      { id: 1, text: 'JEE Mathematics Easy Question 1' },
-      { id: 2, text: 'JEE Mathematics Easy Question 2' },
-      // Add more questions
+    "Algebra": [
+      { id: 1, text: 'JEE Mathematics Algebra Easy Question 1', difficulty: 'easy', options: ['Option A', 'Option B', 'Option C', 'Option D'], answer: 'Option B' },
+      { id: 2, text: 'JEE Mathematics Algebra Medium Question 1', difficulty: 'medium', options: ['Option A', 'Option B', 'Option C', 'Option D'], answer: 'Option C' },
+      { id: 3, text: 'JEE Mathematics Algebra Hard Question 1', difficulty: 'hard', options: ['Option A', 'Option B', 'Option C', 'Option D'], answer: 'Option A' },
     ],
-    medium: [
-      { id: 1, text: 'JEE Mathematics Medium Question 1' },
-      { id: 2, text: 'JEE Mathematics Medium Question 2' },
-      // Add more questions
+    "Calculus": [
+      { id: 4, text: 'JEE Mathematics Calculus Easy Question 1', difficulty: 'easy', options: ['Option A', 'Option B', 'Option C', 'Option D'], answer: 'Option D' },
+      { id: 5, text: 'JEE Mathematics Calculus Medium Question 1', difficulty: 'medium', options: ['Option A', 'Option B', 'Option C', 'Option D'], answer: 'Option B' },
+      { id: 6, text: 'JEE Mathematics Calculus Hard Question 1', difficulty: 'hard', options: ['Option A', 'Option B', 'Option C', 'Option D'], answer: 'Option C' },
     ],
-    hard: [
-      { id: 1, text: 'JEE Mathematics Hard Question 1' },
-      { id: 2, text: 'JEE Mathematics Hard Question 2' },
-      // Add more questions
-    ],
+    // Add more chapters
   },
 };

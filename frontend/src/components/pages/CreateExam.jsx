@@ -2,27 +2,49 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import { Checkbox } from "@/components/ui/checkbox";
 import { motion } from 'framer-motion';
 import { BookOpen, GraduationCap, ClipboardList, School } from 'lucide-react';
+
+import { JEEQuestions } from "@/assets/Questions/JEEQuestions";
+import { NEETQuestions } from "@/assets/Questions/NEETQuestions";
+import { KCETQuestions } from "@/assets/Questions/KCETQuestions";
+import { EleventhQuestions } from "@/assets/Questions/11thQuestions";
+import { TwelfthQuestions } from "@/assets/Questions/12thQuestions";
 
 function CreateExam() {
   const [selectedExam, setSelectedExam] = useState('');
   const [selectedSubject, setSelectedSubject] = useState('');
+  const [selectedChapters, setSelectedChapters] = useState([]);
   const navigate = useNavigate();
 
   const handleExamSelect = (exam) => {
     setSelectedExam(exam);
-    setSelectedSubject(''); // Reset subject selection when exam changes
+    setSelectedSubject('');
+    setSelectedChapters([]);
   };
 
   const handleSubjectSelect = (subject) => {
     setSelectedSubject(subject);
+    setSelectedChapters([]);
+  };
+
+  const handleChapterSelect = (chapter) => {
+    setSelectedChapters(prev => 
+      prev.includes(chapter) 
+        ? prev.filter(c => c !== chapter)
+        : [...prev, chapter]
+    );
+  };
+
+  const handleSelectAllChapters = () => {
+    const allChapters = Object.keys(getQuestions()[selectedSubject] || {});
+    setSelectedChapters(selectedChapters.length === allChapters.length ? [] : allChapters);
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    // Navigate to /questions page with selected exam and subject as query parameters
-    navigate(`/questions?exam=${selectedExam}&subject=${selectedSubject}`);
+    navigate(`/questions?exam=${selectedExam}&subject=${selectedSubject}&chapters=${selectedChapters.join(',')}`);
   };
 
   const exams = [
@@ -40,6 +62,19 @@ function CreateExam() {
     '11th': ['Physics', 'Chemistry', 'Mathematics', 'Biology', 'English'],
     '12th': ['Physics', 'Chemistry', 'Mathematics', 'Biology', 'English'],
   };
+
+  const getQuestions = () => {
+    switch (selectedExam) {
+      case 'JEE': return JEEQuestions;
+      case 'NEET': return NEETQuestions;
+      case 'KCET': return KCETQuestions;
+      case '11th': return EleventhQuestions;
+      case '12th': return TwelfthQuestions;
+      default: return {};
+    }
+  };
+
+  const chapters = selectedSubject ? Object.keys(getQuestions()[selectedSubject] || {}) : [];
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -93,10 +128,48 @@ function CreateExam() {
               </>
             )}
 
+            {selectedSubject && (
+              <>
+                <label className="block text-lg font-medium text-gray-700 mb-2">Select Chapters:</label>
+                <div className="mb-4">
+                  <Card className="p-6 border rounded-md bg-white shadow-sm hover:shadow-md transition-shadow duration-300">
+                    <CardContent>
+                      <div className="flex items-center mb-4">
+                        <Checkbox
+                          id="select-all"
+                          checked={selectedChapters.length === chapters.length}
+                          onCheckedChange={handleSelectAllChapters}
+                          className="h-5 w-5"
+                        />
+                        <label htmlFor="select-all" className="ml-3 text-base font-medium text-gray-700 hover:text-blue-600 cursor-pointer">
+                          Select All Chapters
+                        </label>
+                      </div>
+                      <div className="space-y-3">
+                        {chapters.map((chapter) => (
+                          <div key={chapter} className="flex items-center p-2 rounded-md hover:bg-gray-50 transition-colors duration-200">
+                            <Checkbox
+                              id={chapter}
+                              checked={selectedChapters.includes(chapter)}
+                              onCheckedChange={() => handleChapterSelect(chapter)}
+                              className="h-5 w-5"
+                            />
+                            <label htmlFor={chapter} className="ml-3 text-base font-medium text-gray-700 hover:text-blue-600 cursor-pointer flex-grow">
+                              {chapter}
+                            </label>
+                          </div>
+                        ))}
+                      </div>
+                    </CardContent>
+                  </Card>
+                </div>
+              </>
+            )}
+
             <Button 
               type="submit" 
               className="bg-blue-600 text-white hover:bg-blue-700 transition-all duration-300 transform hover:scale-105"
-              disabled={!selectedExam || !selectedSubject}
+              disabled={!selectedExam || !selectedSubject || selectedChapters.length === 0}
             >
               Continue
             </Button>
