@@ -9,6 +9,7 @@ import DashBoard from './components/pages/DashBoard';
 import CreateExam from './components/pages/CreateExam';
 import SelectQuestions from './components/pages/SelectQuestions';
 import AddedQuestions from './components/pages/AddedQuestions';
+import Preview from './components/pages/Preview';
 
 function ProtectedRoute({ children }) {
   const { isAuthenticated, isLoading } = useAuth0();
@@ -32,6 +33,7 @@ function App() {
         <Route path="/exam" element={<ProtectedRoute><CreateExam /></ProtectedRoute>} />
         <Route path="/questions" element={<ProtectedRoute><SelectQuestions /></ProtectedRoute>} />
         <Route path="/addedQuestions" element={<ProtectedRoute><AddedQuestions /></ProtectedRoute>} />
+        <Route path="/preview" element={<ProtectedRoute><Preview /></ProtectedRoute>} />
       </Routes>
     </Router>
   );

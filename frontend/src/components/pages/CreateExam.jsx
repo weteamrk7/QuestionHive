@@ -6,7 +6,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { motion } from 'framer-motion';
 import { BookOpen, GraduationCap, ClipboardList, School } from 'lucide-react';
 
-import { JEEQuestions } from "@/assets/Questions/JEEQuestions";
+import { JEEQuestions } from '@/assets/Questions/JEEQuestions';
 import { NEETQuestions } from "@/assets/Questions/NEETQuestions";
 import { KCETQuestions } from "@/assets/Questions/KCETQuestions";
 import { EleventhQuestions } from "@/assets/Questions/11thQuestions";

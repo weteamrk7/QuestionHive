@@ -1,15 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { useNavigate } from 'react-router-dom';
-import { ShoppingCart } from 'lucide-react';
-import { Checkbox } from "@/components/ui/checkbox";
-import { Label } from "@/components/ui/label";
-import { Check } from 'lucide-react';
-import { GraduationCap, BookOpen, Filter } from 'lucide-react';
+import { ShoppingCart, GraduationCap, BookOpen, Filter, Check, ChevronRight } from 'lucide-react';
 
+// Import your question sets
 import { JEEQuestions } from "@/assets/Questions/JEEQuestions";
 import { NEETQuestions } from "@/assets/Questions/NEETQuestions";
 import { KCETQuestions } from "@/assets/Questions/KCETQuestions";
@@ -21,20 +17,43 @@ function useQuery() {
 }
 
 function SelectQuestions() {
+  console.log("Rendering SelectQuestions component");
+
   const query = useQuery();
   const exam = query.get('exam');
   const subject = query.get('subject');
   const chapters = query.get('chapters').split(',');
   const [questions, setQuestions] = useState([]);
   const navigate = useNavigate();
-  const [cart, setCart] = useState([]);
   const [filteredQuestions, setFilteredQuestions] = useState([]);
   const [difficultyFilter, setDifficultyFilter] = useState('all');
   const [chapterFilter, setChapterFilter] = useState('all');
 
+  // Load cached selected questions or initialize empty array
+  const [selectedQuestions, setSelectedQuestions] = useState(() => {
+    const cachedData = localStorage.getItem('selectedQuestions');
+    if (cachedData) {
+      const { cachedExam, cachedSubject, cachedQuestions } = JSON.parse(cachedData);
+      if (cachedExam === exam && cachedSubject === subject) {
+        return cachedQuestions;
+      }
+    }
+    return [];
+  });
+
+  // Cache selected questions whenever they change
   useEffect(() => {
+    localStorage.setItem('selectedQuestions', JSON.stringify({
+      cachedExam: exam,
+      cachedSubject: subject,
+      cachedQuestions: selectedQuestions
+    }));
+  }, [selectedQuestions, exam, subject]);
+
+  // Fetch questions only when exam, subject, or chapters change
+  useEffect(() => {
+    console.log("Fetching questions", { exam, subject, chapters });
     const fetchQuestions = () => {
-      let fetchedQuestions = [];
       let questionSet;
       switch (exam) {
         case 'JEE':
@@ -56,47 +75,63 @@ function SelectQuestions() {
           questionSet = {};
       }
       
-      chapters.forEach(chapter => {
+      const fetchedQuestions = chapters.reduce((acc, chapter) => {
         if (questionSet[subject] && questionSet[subject][chapter]) {
-          fetchedQuestions = [...fetchedQuestions, ...questionSet[subject][chapter].map(q => ({...q, chapter}))];
+          return [...acc, ...questionSet[subject][chapter].map(q => ({...q, chapter}))];
         }
-      });
+        return acc;
+      }, []);
       
-      setQuestions(fetchedQuestions);
-      setFilteredQuestions(fetchedQuestions);
+      setQuestions(prevQuestions => {
+        if (JSON.stringify(prevQuestions) !== JSON.stringify(fetchedQuestions)) {
+          return fetchedQuestions;
+        }
+        return prevQuestions;
+      });
     };
 
     fetchQuestions();
   }, [exam, subject, chapters]);
 
+  // Apply filters when questions, difficultyFilter, or chapterFilter change
   useEffect(() => {
-    let filtered = questions;
-    if (difficultyFilter !== 'all') {
-      filtered = filtered.filter(q => q.difficulty === difficultyFilter);
-    }
-    if (chapterFilter !== 'all') {
-      filtered = filtered.filter(q => q.chapter === chapterFilter);
-    }
-    setFilteredQuestions(filtered);
-  }, [difficultyFilter, chapterFilter, questions]);
+    const applyFilters = () => {
+      let filtered = questions;
+      if (difficultyFilter !== 'all') {
+        filtered = filtered.filter(q => q.difficulty === difficultyFilter);
+      }
+      if (chapterFilter !== 'all') {
+        filtered = filtered.filter(q => q.chapter === chapterFilter);
+      }
+      setFilteredQuestions(filtered);
+    };
+
+    applyFilters();
+  }, [questions, difficultyFilter, chapterFilter]);
 
   const handleGoBack = () => {
     navigate(-1);
   };
 
   const toggleCart = (question) => {
-    setCart(prevCart => {
-      const isInCart = prevCart.some(item => item.id === question.id);
-      if (isInCart) {
-        return prevCart.filter(item => item.id !== question.id);
+    setSelectedQuestions(prevSelected => {
+      const isSelected = prevSelected.some(item => item.id === question.id);
+      if (isSelected) {
+        return prevSelected.filter(item => item.id !== question.id);
       } else {
-        return [...prevCart, question];
+        return [...prevSelected, question];
       }
     });
   };
 
+
+  const handleCartClick = () => {
+    navigate('/addedQuestions', { state: { selectedQuestions } });
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
+      {console.log("Rendering JSX")}
       {/* Header */}
       <header className="bg-white shadow-md">
         <div className="container mx-auto px-4 py-4 flex justify-between items-center">
@@ -111,11 +146,11 @@ function SelectQuestions() {
             >
               Go Back
             </Button>
-            <div className="relative">
+            <div className="relative cursor-pointer" onClick={handleCartClick}>
               <ShoppingCart className="text-indigo-600 w-6 h-6" />
-              {cart.length > 0 && (
+              {selectedQuestions.length > 0 && (
                 <span className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs">
-                  {cart.length}
+                  {selectedQuestions.length}
                 </span>
               )}
             </div>
@@ -191,12 +226,12 @@ function SelectQuestions() {
             <div className="w-1/4 flex flex-col items-end justify-between">
               <div className="bg-indigo-50 p-4 rounded-lg text-center w-full">
                 <span className="text-sm font-medium text-indigo-700 block mb-2">Selected</span>
-                <span className="text-2xl font-bold text-indigo-600">{cart.length}</span>
+                <span className="text-2xl font-bold text-indigo-600">{selectedQuestions.length}</span>
               </div>
               <Button 
                 variant="outline" 
                 size="sm" 
-                onClick={() => setCart([])} 
+                onClick={() => setSelectedQuestions([])} 
                 className="text-red-600 border-red-600 hover:bg-red-50 mt-4 w-full"
               >
                 Clear Selection
@@ -218,7 +253,7 @@ function SelectQuestions() {
               </thead>
               <tbody>
                 {filteredQuestions.map((question, index) => {
-                  const isInCart = cart.some(item => item.id === question.id);
+                  const isSelected = selectedQuestions.some(item => item.id === question.id);
                   return (
                     <motion.tr 
                       key={question.id}
@@ -230,13 +265,13 @@ function SelectQuestions() {
                       <td className="py-4 px-6">
                         <div
                           className={`w-6 h-6 rounded-md border-2 flex items-center justify-center cursor-pointer transition-all duration-200 ${
-                            isInCart 
+                            isSelected 
                               ? 'bg-indigo-500 border-indigo-500 shadow-md' 
                               : 'border-indigo-300 hover:border-indigo-500 hover:shadow'
                           }`}
                           onClick={() => toggleCart(question)}
                         >
-                          {isInCart && <Check className="w-4 h-4 text-white" />}
+                          {isSelected && <Check className="w-4 h-4 text-white" />}
                         </div>
                       </td>
                       <td className="py-4 px-6 text-indigo-500 font-medium">{index + 1}</td>
@@ -276,12 +311,24 @@ function SelectQuestions() {
             </table>
           </CardContent>
         </Card>
+
+        {selectedQuestions.length > 0 && (
+          <div className="fixed bottom-6 left-0 right-0 px-6">
+            <Button 
+              className="w-full bg-indigo-600 text-white hover:bg-indigo-700 py-3 rounded-lg shadow-lg transition-all duration-300 ease-in-out flex items-center justify-center"
+              onClick={handleCartClick}
+            >
+              View Selected Questions
+              <ChevronRight className="ml-2 h-5 w-5" />
+            </Button>
+          </div>
+        )}
       </main>
 
       {/* Footer */}
-      <footer className="bg-indigo-800 text-white py-8">
+      <footer className="bg-indigo-800 text-white py-8 mt-12">
         <div className="container mx-auto px-4">
-          <div className="mt-8 text-center text-sm text-indigo-200">
+          <div className="text-center text-sm text-indigo-200">
             <p>&copy; {new Date().getFullYear()} MyKagada. All rights reserved.</p>
           </div>
         </div>
