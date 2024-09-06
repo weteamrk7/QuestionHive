@@ -11,7 +11,7 @@ const styles = StyleSheet.create({
   page: {
     flexDirection: 'column',
     backgroundColor: '#ffffff',
-    padding: 40,
+    padding: 20, // Reduced padding for mobile
     fontFamily: 'Times-Roman',
   },
   header: {
@@ -33,10 +33,9 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   subHeader: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
+    flexDirection: 'column', // Changed to column for mobile
     marginBottom: 20,
-    fontSize: 12,
+    fontSize: 10, // Reduced font size for mobile
   },
   questionSection: {
     marginBottom: 10,
@@ -191,12 +190,12 @@ const Preview = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-100 py-12 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-gray-100 py-6 px-4 sm:py-12 sm:px-6 lg:px-8">
       <div className="max-w-4xl mx-auto">
-        <h1 className="text-3xl font-bold text-center text-gray-900 mb-8">Preview Selected Questions</h1>
+        <h1 className="text-2xl sm:text-3xl font-bold text-center text-gray-900 mb-6 sm:mb-8">Preview Selected Questions</h1>
         
         {/* Input fields */}
-        <div className="mb-8 grid grid-cols-1 gap-6 sm:grid-cols-2">
+        <div className="mb-6 sm:mb-8 grid grid-cols-1 gap-4 sm:gap-6">
           <input
             type="text"
             name="schoolName"
@@ -231,10 +230,10 @@ const Preview = () => {
         </div>
 
         {/* Export PDF button */}
-        <div className="mb-8 text-center">
+        <div className="mb-6 sm:mb-8 text-center">
           <button
             onClick={handleExportPDF}
-            className="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+            className="w-full sm:w-auto inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
           >
             Export PDF
           </button>
@@ -242,7 +241,7 @@ const Preview = () => {
 
         {/* PDF Preview */}
         <div className="bg-white shadow-lg rounded-lg overflow-hidden">
-          <PDFViewer width="100%" height="600px" showToolbar={false}>
+          <PDFViewer width="100%" height="400px" showToolbar={false}>
             <PDFDocument formData={formData} selectedQuestions={selectedQuestions} />
           </PDFViewer>
         </div>
@@ -250,7 +249,7 @@ const Preview = () => {
         {/* Animation overlay */}
         {showAnimation && (
           <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
-            <div className="text-white text-4xl font-bold animate-bounce">
+            <div className="text-white text-2xl sm:text-4xl font-bold animate-bounce text-center px-4">
               PDF Exported Successfully!
             </div>
           </div>
