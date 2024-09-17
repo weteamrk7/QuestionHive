@@ -36,14 +36,14 @@ const Profile = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 py-8">
+    <div className="min-h-screen bg-gray-50 py-8 flex items-center justify-center">
       <motion.div 
-        className="container mx-auto px-4"
+        className="w-full max-w-2xl px-4"
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
       >
-        <Card className="w-full max-w-2xl mx-auto bg-white shadow-lg hover:shadow-xl transition-shadow duration-300">
+        <Card className="bg-white shadow-lg hover:shadow-xl transition-shadow duration-300">
           <CardHeader className="text-center bg-gradient-to-r from-blue-600 to-blue-800 text-white py-8 rounded-t-lg">
             <Avatar className="w-32 h-32 mx-auto mb-4 border-4 border-white shadow-lg">
               <AvatarImage src={user.imageUrl} alt={user.fullName} />

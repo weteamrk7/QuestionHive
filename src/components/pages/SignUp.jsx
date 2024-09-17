@@ -13,8 +13,10 @@ function SignUpPage() {
   }, [isSignedIn, navigate]);
 
   return (
-    <div>
-      <ClerkSignUp redirectUrl="/dashboard" />
+    <div className="min-h-screen flex items-center justify-center bg-gray-50">
+      <div className="w-full max-w-md">
+        <ClerkSignUp redirectUrl="/dashboard" />
+      </div>
     </div>
   );
 }

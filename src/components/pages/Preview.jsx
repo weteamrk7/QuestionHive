@@ -190,8 +190,8 @@ const Preview = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-100 py-6 px-4 sm:py-12 sm:px-6 lg:px-8">
-      <div className="max-w-4xl mx-auto">
+    <div className="min-h-screen bg-gray-100 py-6 px-4 sm:py-12 sm:px-6 lg:px-8 flex items-center justify-center">
+      <div className="w-full max-w-4xl">
         <h1 className="text-2xl sm:text-3xl font-bold text-center text-gray-900 mb-6 sm:mb-8">Preview Selected Questions</h1>
         
         {/* Input fields */}

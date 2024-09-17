@@ -13,8 +13,10 @@ function Login() {
   }, [isSignedIn, navigate]);
 
   return (
-    <div>
-      <SignIn redirectUrl="/dashboard" />
+    <div className="min-h-screen flex items-center justify-center bg-gray-50">
+      <div className="w-full max-w-md">
+        <SignIn redirectUrl="/dashboard" />
+      </div>
     </div>
   );
 }
