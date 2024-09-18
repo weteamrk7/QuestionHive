@@ -137,7 +137,7 @@ function SelectQuestions() {
       <header className="bg-white shadow-sm sticky top-0 z-10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <div className="flex justify-between items-center">
-            <h1 className="text-xl font-bold text-indigo-600">MyKagada</h1>
+            <h1 className="text-xl font-bold text-indigo-600">Question Hive</h1>
             <Button
               variant="outline"
               size="sm"
@@ -293,7 +293,7 @@ function SelectQuestions() {
       <footer className="bg-white border-t border-gray-200 py-4 mt-8">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <p className="text-center text-sm text-gray-500">
-            &copy; {new Date().getFullYear()} MyKagada. All rights reserved.
+            &copy; {new Date().getFullYear()} Question Hive. All rights reserved.
           </p>
         </div>
       </footer>

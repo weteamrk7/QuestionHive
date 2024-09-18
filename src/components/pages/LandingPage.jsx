@@ -489,7 +489,7 @@ const ExamManagementLandingPage = () => {
             </div>
           </div>
           <div className="mt-12 pt-8 border-t border-blue-800 text-center">
-            <p>&copy; 2024 MyKagada. All rights reserved.</p>
+            <p>&copy; 2024 Question Hive. All rights reserved.</p>
           </div>
         </div>
       </footer>

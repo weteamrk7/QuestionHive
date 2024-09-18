@@ -49,7 +49,7 @@ export default function HomePage() {
       {/* Header */}
       <header className="bg-white shadow-sm">
         <div className="container mx-auto px-4 py-4 flex justify-between items-center">
-          <h1 className="text-2xl font-bold text-blue-700 hover:text-blue-800 transition-colors duration-300">MyKagada</h1>
+          <h1 className="text-2xl font-bold text-blue-700 hover:text-blue-800 transition-colors duration-300">Question Hive</h1>
           <div className="flex items-center space-x-4">
             <Button 
               variant="outline" 
@@ -177,7 +177,7 @@ export default function HomePage() {
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div>
-              <h4 className="text-lg font-semibold mb-4">MyKagada</h4>
+              <h4 className="text-lg font-semibold mb-4">Question Hive</h4>
               <p className="text-sm text-gray-300">Empowering educators with comprehensive exam management tools.</p>
             </div>
             <div>
@@ -196,7 +196,7 @@ export default function HomePage() {
             </div>
           </div>
           <div className="mt-8 text-center text-sm text-gray-400">
-            <p>&copy; {new Date().getFullYear()} MyKagada. All rights reserved.</p>
+            <p>&copy; {new Date().getFullYear()} Question Hive. All rights reserved.</p>
           </div>
         </div>
       </footer>
