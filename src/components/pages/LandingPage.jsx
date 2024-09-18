@@ -59,7 +59,7 @@ const ExamManagementLandingPage = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
           >
-            My Kaagada
+            Question Hive
           </motion.div>
           <div className="hidden md:flex space-x-8">
             <NavItem to="features" isScrolled={isScrolled}>Features</NavItem>
