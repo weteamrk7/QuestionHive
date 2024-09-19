@@ -178,7 +178,7 @@ export default function HomePage() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div>
               <h4 className="text-lg font-semibold mb-4">Question Hive</h4>
-              <p className="text-sm text-gray-300">Empowering educators with comprehensive exam management tools.</p>
+              <p className="text-sm text-gray-300">Elevating Exam Standards</p>
             </div>
             <div>
               <h4 className="text-lg font-semibold mb-4">Quick Links</h4>
