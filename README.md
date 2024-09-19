@@ -1,11 +1,11 @@
 <<<<<<< HEAD
-# My Kaagada Frontend
+# Question Hive Frontend
 
-This is the frontend for the My Kaagada project, an exam management platform built with React.
+This is the front end for the My Kaagada project, an exam management platform built with React.
 
 ## Folder Structure
 =======
-# My-Kagada
+# Question Hive
 
 ## Installation
 

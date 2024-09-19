@@ -80,7 +80,7 @@ function CreateExam() {
     <div className="min-h-screen bg-gray-50">
       <header className="bg-white shadow-sm">
         <div className="container mx-auto px-4 py-3 sm:py-4 flex justify-between items-center">
-          <h1 className="text-lg sm:text-xl md:text-2xl font-bold text-blue-700 hover:text-blue-800 transition-colors duration-300">MyKagada</h1>
+          <h1 className="text-lg sm:text-xl md:text-2xl font-bold text-blue-700 hover:text-blue-800 transition-colors duration-300">Question Hive</h1>
         </div>
       </header>
 
@@ -181,7 +181,7 @@ function CreateExam() {
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 sm:gap-8">
             <div>
-              <h4 className="text-base sm:text-lg font-semibold mb-3 sm:mb-4">MyKagada</h4>
+              <h4 className="text-base sm:text-lg font-semibold mb-3 sm:mb-4">Question Hive</h4>
               <p className="text-xs sm:text-sm text-gray-300">Empowering educators with comprehensive exam management tools.</p>
             </div>
             <div>
@@ -200,7 +200,7 @@ function CreateExam() {
             </div>
           </div>
           <div className="mt-6 sm:mt-8 text-center text-xs sm:text-sm text-gray-400">
-            <p>&copy; {new Date().getFullYear()} MyKagada. All rights reserved.</p>
+            <p>&copy; {new Date().getFullYear()} Question Hive. All rights reserved.</p>
           </div>
         </div>
       </footer>

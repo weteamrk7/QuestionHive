@@ -59,7 +59,7 @@ const ExamManagementLandingPage = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
           >
-            My Kaagada
+            Question Hive
           </motion.div>
           <div className="hidden md:flex space-x-8">
             <NavItem to="features" isScrolled={isScrolled}>Features</NavItem>
@@ -345,53 +345,60 @@ const ExamManagementLandingPage = () => {
 
         {/* Pricing */}
         <section id="pricing" className="py-16 md:py-20 bg-gray-100 text-blue-900">
-          <div className="container mx-auto px-4 sm:px-6">
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-12 text-center">Choose Your Perfect Plan</h2>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              {[
-                { title: "Basic", price: "$9", period: "mo", features: ["100 question bank access", "10 custom questions/month", "5 exams/month", "PDF export"] },
-                { title: "Pro", price: "$19", period: "mo", features: ["Unlimited question bank", "Unlimited custom questions", "Unlimited exams", "Advanced analytics"] },
-                { title: "Enterprise", price: "Custom", period: "", features: ["Everything in Pro", "Dedicated support", "Custom integrations", "Personalized training"] }
-              ].map((plan, index) => (
-                <motion.div 
-                  key={index}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: index * 0.2 }}
-                >
-                  <Card className={`flex flex-col ${index === 1 ? 'bg-blue-600 text-white scale-105 shadow-xl' : 'bg-white'}`}>
-                    <CardHeader>
-                      <CardTitle className="text-2xl mb-2">{plan.title}</CardTitle>
-                      <p className="text-4xl font-bold mb-1">{plan.price}<span className="text-xl font-normal">/{plan.period}</span></p>
-                    </CardHeader>
-                    <CardContent className="flex-grow">
-                      <ul className="space-y-3 mb-6">
-                        {plan.features.map((feature, fIndex) => (
-                          <li key={fIndex} className="flex items-center">
-                            <svg className="w-5 h-5 mr-2 text-green-500" fill="currentColor" viewBox="0 0 20 20">
-                              <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                            </svg>
-                            {feature}
-                          </li>
-                        ))}
-                      </ul>
-                    </CardContent>
-                    <div className="p-6 mt-auto">
-                      <Button className={`w-full text-lg py-3 font-semibold ${
-                        index === 1 
-                          ? 'bg-white text-blue-600 hover:bg-blue-50 shadow-lg' 
-                          : 'bg-blue-600 text-white hover:bg-blue-700 shadow-md'
-                      }`}>
-                        {index === 2 ? "Contact Sales" : "Get Started"}
-                      </Button>
-                    </div>
-                  </Card>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </section>
+  <div className="container mx-auto px-4 sm:px-6">
+    <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-12 text-center">Choose Your Perfect Plan</h2>
 
+    {/* Notification Section */}
+    <div className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded mb-8 text-center" role="alert">
+      <strong className="font-bold">Special Offer!</strong>
+      <span className="block sm:inline ml-2">Create up to 7 question papers for free before choosing a plan!</span>
+    </div>
+
+    {/* Pricing Cards */}
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+      {[
+        { title: "Basic", price: "$9", period: "mo", features: ["100 question bank access", "10 custom questions/month", "5 exams/month", "PDF export"] },
+        { title: "Pro", price: "$19", period: "mo", features: ["Unlimited question bank", "Unlimited custom questions", "Unlimited exams", "Advanced analytics"] },
+        { title: "Enterprise", price: "Custom", period: "", features: ["Everything in Pro", "Dedicated support", "Custom integrations", "Personalized training"] }
+      ].map((plan, index) => (
+        <motion.div 
+          key={index}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: index * 0.2 }}
+        >
+          <Card className={`flex flex-col ${index === 1 ? 'bg-blue-600 text-white scale-105 shadow-xl' : 'bg-white'}`}>
+            <CardHeader>
+              <CardTitle className="text-2xl mb-2">{plan.title}</CardTitle>
+              <p className="text-4xl font-bold mb-1">{plan.price}<span className="text-xl font-normal">/{plan.period}</span></p>
+            </CardHeader>
+            <CardContent className="flex-grow">
+              <ul className="space-y-3 mb-6">
+                {plan.features.map((feature, fIndex) => (
+                  <li key={fIndex} className="flex items-center">
+                    <svg className="w-5 h-5 mr-2 text-green-500" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                    </svg>
+                    {feature}
+                  </li>
+                ))}
+              </ul>
+            </CardContent>
+            <div className="p-6 mt-auto">
+              <Button className={`w-full text-lg py-3 font-semibold ${
+                index === 1 
+                  ? 'bg-white text-blue-600 hover:bg-blue-50 shadow-lg' 
+                  : 'bg-blue-600 text-white hover:bg-blue-700 shadow-md'
+              }`}>
+                {index === 2 ? "Contact Sales" : "Get Started"}
+              </Button>
+            </div>
+          </Card>
+        </motion.div>
+      ))}
+    </div>
+  </div>
+</section>
         {/* Contact Us */}
         <section id="contact" className="py-16 md:py-20 bg-gray-200 text-blue-900">
           <div className="container mx-auto px-4 sm:px-6">
@@ -489,7 +496,7 @@ const ExamManagementLandingPage = () => {
             </div>
           </div>
           <div className="mt-12 pt-8 border-t border-blue-800 text-center">
-            <p>&copy; 2024 MyKagada. All rights reserved.</p>
+            <p>&copy; 2024 Question Hive. All rights reserved.</p>
           </div>
         </div>
       </footer>
