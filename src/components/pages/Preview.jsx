@@ -132,9 +132,9 @@ const PDFDocument = ({ formData, selectedQuestions }) => {
           )}
 
           {pageQuestions.map((question, index) => (
-            <View key={question.id} style={styles.questionSection}>
+            <View key={question.Id} style={styles.questionSection}>
               <Text style={styles.questionText}>
-                {questionsPerPage.slice(0, pageIndex).flat().length + index + 1}. {question.text}
+                {questionsPerPage.slice(0, pageIndex).flat().length + index + 1}. {question.question}
               </Text>
               {question.options && (
                 <View style={styles.optionsContainer}>

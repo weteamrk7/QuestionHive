@@ -46,6 +46,7 @@ function CreateExam() {
     event.preventDefault();
     navigate(`/questions?exam=${selectedExam}&subject=${selectedSubject}&chapters=${selectedChapters.join(',')}`);
   };
+  
 
   const exams = [
     { name: 'JEE', icon: <GraduationCap className="h-6 w-6" /> },
