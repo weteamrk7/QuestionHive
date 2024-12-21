@@ -10,6 +10,8 @@ import CreateExam from './components/pages/CreateExam';
 import SelectQuestions from './components/pages/SelectQuestions';
 import AddedQuestions from './components/pages/AddedQuestions';
 import Preview from './components/pages/Preview';
+import AddQuestions from './components/adminPages/addQuestions';
+
 
 function ProtectedRoute({ children }) {
   const { isSignedIn, isLoaded } = useAuth();
@@ -38,6 +40,7 @@ function App() {
           <Route path="/" element={<ExamManagementLandingPage />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<SignUpPage />} />
+          <Route path="/addQuestionToDatabase" element={<AddQuestions />} />
           <Route path="/profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
           <Route path="/dashboard" element={<ProtectedRoute><DashBoard /></ProtectedRoute>} />
           <Route path="/exam" element={<ProtectedRoute><CreateExam /></ProtectedRoute>} />

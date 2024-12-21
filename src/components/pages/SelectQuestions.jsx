@@ -11,6 +11,8 @@ import { NEETQuestions } from "@/assets/Questions/NEETQuestions";
 import { KCETQuestions } from "@/assets/Questions/KCETQuestions";
 import { EleventhQuestions } from "@/assets/Questions/11thQuestions";
 import { TwelfthQuestions } from "@/assets/Questions/12thQuestions";
+import axios from 'axios';
+
 
 function useQuery() {
   return new URLSearchParams(useLocation().search);
@@ -44,20 +46,17 @@ function SelectQuestions() {
  // simple useEffect to fetch data
  useEffect(()=>{
   const fetchQuestions = async() => {
-    let questionSet;
-
-    // category, subject, chapter
-    // questionSet = await fetch(`http://localhost:3000/api/questions?subject=${subject}category=${exam}chapter=${chapters}`)
+ 
     try{
-      let questionData = await fetch(`http://localhost:3000/api/questions?subject=${subject}&category=${exam}`)
-      questionSet = await questionData.json();
-      console.log(questionSet);
-      setFilteredQuestions(questionSet);
-      setQuestions(questionSet);
+      const response = await axios.get(`http://localhost:3000/api/question/getQuestions?subject=${subject}&category=${exam}&chapter=${'all'}`);
+      let questions = response.data.questions
+      console.log(questions);
+      setFilteredQuestions(questions);
+      setQuestions(questions);
     }
     catch(e)
     {
-      console.log("Seme error occured in connecting with server...");
+      console.log("Some error occured in connecting with server...");
     }
 
 
@@ -185,9 +184,9 @@ function SelectQuestions() {
 
   const toggleCart = (question) => {
     setSelectedQuestions(prevSelected => {
-      const isSelected = prevSelected.some(item => item.Id === question.Id);
+      const isSelected = prevSelected.some(item => item._id === question._id);
       if (isSelected) {
-        return prevSelected.filter(item => item.Id !== question.Id);
+        return prevSelected.filter(item => item._id !== question._id);
       } else {
         return [...prevSelected, question];
       }
@@ -298,9 +297,9 @@ function SelectQuestions() {
               </thead>
               <tbody className="divide-y divide-gray-200">
                 {filteredQuestions.map((question, index) => {
-                  const isSelected = selectedQuestions.some(item => item.Id === question.Id);
+                  const isSelected = selectedQuestions.some(item => item._id === question._id);
                   return (
-                    <tr key={question.Id} className="hover:bg-gray-50">
+                    <tr key={question._id} className="hover:bg-gray-50">
                       <td className="px-4 py-4 whitespace-nowrap">
                         <div
                           className={`w-5 h-5 rounded-md border-2 flex items-center justify-center cursor-pointer ${

@@ -36,7 +36,7 @@ const AddedQuestions = () => {
         ) : (
           <div className="space-y-6">
             {selectedQuestions.map((question, index) => (
-              <div key={question.Id} className="bg-white rounded-lg shadow-md p-6 transition-all hover:shadow-lg">
+              <div key={question._id} className="bg-white rounded-lg shadow-md p-6 transition-all hover:shadow-lg">
                 <h2 className="text-xl font-semibold text-gray-800 mb-4">
                   {index + 1}. {question.question}
                 </h2>
