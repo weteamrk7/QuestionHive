@@ -21,6 +21,7 @@ function ProtectedRoute({ children }) {
       <div className="flex items-center justify-center min-h-screen bg-gray-100">
               <div className="text-xl font-semibold text-gray-700">Loading...</div>
       </div>)
+    )
   }
 
   return isSignedIn ? children : <Navigate to="/login" />;
@@ -30,8 +31,8 @@ function App() {
   return (
     <>
     <ClerkLoading>
-      <div className="flex items-center justify-center min-h-screen bg-gray-100">
-              <div className="text-xl font-semibold text-gray-700">Loading...</div>
+     <div className="flex items-center justify-center min-h-screen bg-gray-100">
+              <div className="text-xl font-semibold text-gray-700">Question Hive Powered by <img className='w-50 h-60' src="./watermark.jpeg" /></div>
       </div>
     </ClerkLoading>
     <ClerkLoaded>
