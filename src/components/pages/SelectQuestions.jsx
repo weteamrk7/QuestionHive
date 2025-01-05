@@ -48,7 +48,7 @@ function SelectQuestions() {
   const fetchQuestions = async() => {
  
     try{
-      const response = await axios.get(`http://localhost:3000/api/question/getQuestions?subject=${subject}&category=${exam}&chapter=${'all'}`);
+      const response = await axios.get(`http://localhost:7896/api/question/getQuestions?subject=${subject}&category=${exam}&chapter=${'all'}`);
       let questions = response.data.questions
       console.log(questions);
       setFilteredQuestions(questions);

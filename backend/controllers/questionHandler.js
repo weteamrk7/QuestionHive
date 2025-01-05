@@ -86,3 +86,33 @@ export async function getQuestions(req, res){
            })
     }
 }
+export async function getChapters(req, res){
+
+    
+    const { category, subject } = req.query;
+    // console.log(category, subject, chapter)
+    try {
+        
+
+   
+        if (!subject || !category) {
+            return res.status(400).json({ error: 'Subject and Category are required' });
+          }
+      
+        
+          const chapters = await Question.aggregate([
+            { $match: { subject, category } }, 
+            { $group: { _id: '$chapter' } }, 
+            { $project: { _id: 0, chapter: '$_id' } }, 
+          ]);
+      
+          res.status(200).json({chapters : chapters.map(chapter => chapter.chapter)});
+    } catch (e) {
+        res.status(201).json({
+            success : false,
+            error : true,
+            message : "some internal server error occured",
+            e 
+           })
+    }
+}

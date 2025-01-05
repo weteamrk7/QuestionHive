@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -11,11 +11,28 @@ import { NEETQuestions } from "@/assets/Questions/NEETQuestions";
 import { KCETQuestions } from "@/assets/Questions/KCETQuestions";
 import { EleventhQuestions } from "@/assets/Questions/11thQuestions";
 import { TwelfthQuestions } from "@/assets/Questions/12thQuestions";
+import { getChapters } from '@/utils/questionHandler';
 
 function CreateExam() {
+  
+  
+  const getQuestions = () => {
+    switch (selectedExam) {
+      case 'JEE': return JEEQuestions;
+      case 'NEET': return NEETQuestions;
+      case 'KCET': return KCETQuestions;
+      case '11th': return EleventhQuestions;
+      case '12th': return TwelfthQuestions; 
+      default: return {};
+    }
+  };
+
+  
   const [selectedExam, setSelectedExam] = useState('');
   const [selectedSubject, setSelectedSubject] = useState('');
   const [selectedChapters, setSelectedChapters] = useState([]);
+  const [chapters, setChapters] = useState(selectedSubject ? Object.keys(getQuestions()[selectedSubject] || {}) : []);
+  // const [chapters, setChapters] = useState([]);
   const navigate = useNavigate();
 
   const handleExamSelect = (exam) => {
@@ -38,8 +55,8 @@ function CreateExam() {
   };
 
   const handleSelectAllChapters = () => {
-    const allChapters = Object.keys(getQuestions()[selectedSubject] || {});
-    setSelectedChapters(selectedChapters.length === allChapters.length ? [] : allChapters);
+    // const allChapters = Object.keys(getQuestions()[selectedSubject] || {});
+    setSelectedChapters(selectedChapters.length === chapters.length ? [] : chapters);
   };
 
   const handleSubmit = (event) => {
@@ -64,18 +81,21 @@ function CreateExam() {
     '12th': ['Physics', 'Chemistry', 'Mathematics', 'Biology', 'English'],
   };
 
-  const getQuestions = () => {
-    switch (selectedExam) {
-      case 'JEE': return JEEQuestions;
-      case 'NEET': return NEETQuestions;
-      case 'KCET': return KCETQuestions;
-      case '11th': return EleventhQuestions;
-      case '12th': return TwelfthQuestions;
-      default: return {};
-    }
-  };
+   
 
-  const chapters = selectedSubject ? Object.keys(getQuestions()[selectedSubject] || {}) : [];
+  useEffect(()=>{
+      if(selectedExam !== '' && selectedSubject !== '')
+      {
+        async function fetchChapters(){
+          let chapters = await getChapters({category : selectedExam,subject : selectedSubject});
+          console.log(chapters)
+          setChapters(chapters);
+        }
+        fetchChapters();
+
+        console.log(selectedExam,selectedSubject,selectedChapters);
+      }
+  },[selectedExam,selectedSubject])
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -139,7 +159,7 @@ function CreateExam() {
                     <div className="flex items-center">
                       <Checkbox
                         id="select-all"
-                        checked={selectedChapters.length === chapters.length}
+                        checked={selectedChapters.length === chapters?.length}
                         onCheckedChange={handleSelectAllChapters}
                         className="h-4 w-4 sm:h-5 sm:w-5"
                       />
@@ -148,7 +168,7 @@ function CreateExam() {
                       </label>
                     </div>
                     <div className="space-y-2 sm:space-y-3 max-h-60 sm:max-h-80 overflow-y-auto">
-                      {chapters.map((chapter) => (
+                      {chapters?.length > 0 && chapters.map((chapter) => (
                         <div key={chapter} className="flex items-center p-2 rounded-md hover:bg-gray-50 transition-colors duration-200">
                           <Checkbox
                             id={chapter}

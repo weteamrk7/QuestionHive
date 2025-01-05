@@ -1,6 +1,8 @@
-import React, { useState } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Document, Page, Text, View, StyleSheet, pdf, Font, PDFViewer } from '@react-pdf/renderer';
+import { useAuth } from '@/context/userContext';
+import { updateCredits } from '@/utils/userHandler';
 
 Font.register({
   family: 'Arial',
@@ -83,6 +85,9 @@ const styles = StyleSheet.create({
 });
 
 const PDFDocument = ({ formData, selectedQuestions }) => {
+
+  
+ 
   const questionsPerPage = [];
   let currentPage = [];
   let currentHeight = 0;
@@ -112,6 +117,7 @@ const PDFDocument = ({ formData, selectedQuestions }) => {
   if (currentPage.length > 0) {
     questionsPerPage.push(currentPage);
   }
+
 
   return (
     <Document>
@@ -156,6 +162,8 @@ const PDFDocument = ({ formData, selectedQuestions }) => {
 };
 
 const Preview = () => {
+
+  const { user, loadUser } = useAuth();
   const location = useLocation();
   const navigate = useNavigate();
   const { selectedQuestions } = location.state || { selectedQuestions: [] };
@@ -172,22 +180,48 @@ const Preview = () => {
   };
 
   const handleExportPDF = async () => {
-    const blob = await pdf(<PDFDocument formData={formData} selectedQuestions={selectedQuestions} />).toBlob();
-    const url = URL.createObjectURL(blob);
-    const link = document.createElement('a');
-    link.href = url;
-    link.download = 'question_paper.pdf';
-    link.click();
-    URL.revokeObjectURL(url);
+    await loadUser();
 
-    // Show animation
-    setShowAnimation(true);
+    console.log(user, user.serviceCount);
 
-    // Redirect after 3 seconds
-    setTimeout(() => {
-      navigate('/dashboard');
-    }, 3000);
+    if(user.serviceCount > 0)
+    {
+      
+        const blob = await pdf(<PDFDocument formData={formData} selectedQuestions={selectedQuestions} />).toBlob();
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = 'question_paper.pdf';
+        link.click();
+        URL.revokeObjectURL(url);
+
+        // Show animation
+        setShowAnimation(true);
+
+        try {
+          await updateCredits(1,0)  ;
+        } catch (error) {
+          console.log('credits not reduced properly.');
+        }
+
+        // Redirect after 3 seconds
+        setTimeout(() => {
+          // navigate('/dashboard');
+        }, 3000);
+
+    }
+    else{
+      alert("You do not have Credits to create PDF's! Please purchase some to continue.")
+    }
   };
+
+  // useEffect(()=>{
+  //   async function loadData(){
+  //     await loadUser();
+  //     console.log('.....................');
+  //   }
+  //   loadData();
+  // },[loadUser])
 
   return (
     <div className="min-h-screen bg-gray-100 py-6 px-4 sm:py-12 sm:px-6 lg:px-8 flex items-center justify-center">
@@ -230,7 +264,8 @@ const Preview = () => {
         </div>
 
         {/* Export PDF button */}
-        <div className="mb-6 sm:mb-8 text-center">
+        <div className="mb-6 sm:mb-8 text-center ">
+         
           <button
             onClick={handleExportPDF}
             className="w-full sm:w-auto inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
@@ -254,6 +289,15 @@ const Preview = () => {
             </div>
           </div>
         )}
+
+        <div className='text-center mt-5'>
+        <Link
+            to={'/'}
+             className="w-full sm:w-auto inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-gray-600 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-white-500"
+          >
+            &lt;- Go Home
+          </Link>
+        </div>
       </div>
     </div>
   );

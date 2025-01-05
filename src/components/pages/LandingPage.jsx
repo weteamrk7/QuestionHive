@@ -6,19 +6,20 @@ import { Link as ScrollLink } from 'react-scroll';
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
 import { Menu } from "lucide-react"
 import { Link, useNavigate } from 'react-router-dom';
-import { useAuth, SignInButton, SignUpButton } from '@clerk/clerk-react';
+// import { useAuth, SignInButton, SignUpButton } from '@clerk/clerk-react';
+import { useAuth } from '../../context/userContext';
 
 const ExamManagementLandingPage = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  const { isSignedIn } = useAuth();
+  const { isAuthenticated } = useAuth();
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (isSignedIn) {
+    if (isAuthenticated) {
       navigate('/dashboard');
     }
-  }, [isSignedIn, navigate]);
+  }, [isAuthenticated, navigate]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -69,7 +70,7 @@ const ExamManagementLandingPage = () => {
             <NavItem to="contact" isScrolled={isScrolled}>Contact Us</NavItem>
           </div>
           <div className="hidden md:flex space-x-4">
-            {isSignedIn ? (
+            {isAuthenticated ? (
               <>
                 <Link to="/profile">
                   <Button variant="outline" size="lg" className={`font-semibold ${
@@ -93,8 +94,9 @@ const ExamManagementLandingPage = () => {
               </>
             ) : (
               <>
-                <SignUpButton mode="modal">
+                
                   <Button 
+                    onClick = {()=>navigate('/signup')}
                     variant="outline" 
                     size="lg" 
                     className={`font-semibold ${
@@ -105,9 +107,10 @@ const ExamManagementLandingPage = () => {
                   >
                     Sign Up
                   </Button>
-                </SignUpButton>
-                <SignInButton mode="modal">
+                
+                
                   <Button 
+                   onClick = {()=>navigate('/login')}
                     size="lg" 
                     className={`font-semibold ${
                       isScrolled
@@ -117,7 +120,7 @@ const ExamManagementLandingPage = () => {
                   >
                     Login
                   </Button>
-                </SignInButton>
+                
               </>
             )}
           </div>
@@ -134,7 +137,7 @@ const ExamManagementLandingPage = () => {
                 <NavItem to="exams" isScrolled={isScrolled}>Exams</NavItem>
                 <NavItem to="pricing" isScrolled={isScrolled}>Pricing</NavItem>
                 <NavItem to="contact" isScrolled={isScrolled}>Contact Us</NavItem>
-                {isSignedIn ? (
+                {isAuthenticated ? (
                   <>
                     <Link to="/profile" onClick={closeMenu}>
                       <Button variant="outline" size="lg" className={`font-semibold w-full ${
@@ -158,8 +161,9 @@ const ExamManagementLandingPage = () => {
                   </>
                 ) : (
                   <>
-                    <SignUpButton mode="modal">
+                    
                       <Button 
+                       onClick = {()=>navigate('/signup')}
                         variant="outline" 
                         size="lg" 
                         className={`font-semibold w-full ${
@@ -170,9 +174,10 @@ const ExamManagementLandingPage = () => {
                       >
                         Sign Up
                       </Button>
-                    </SignUpButton>
-                    <SignInButton mode="modal">
+                   
+                    
                       <Button 
+                        onClick = {()=>navigate('/login')}
                         size="lg" 
                         className={`font-semibold w-full ${
                           isScrolled
@@ -182,7 +187,7 @@ const ExamManagementLandingPage = () => {
                       >
                         Login
                       </Button>
-                    </SignInButton>
+                    
                   </>
                 )}
               </nav>
@@ -204,14 +209,15 @@ const ExamManagementLandingPage = () => {
               <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight">Create and Manage Exams with Ease</h1>
               <p className="text-xl sm:text-2xl mb-8 text-blue-200">Empower your teaching with our intuitive exam platform. Create, organize, and distribute MCQs effortlessly.</p>
               <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
-                <SignUpButton mode="modal">
+      
                   <Button 
+                    onClick = {()=>navigate('/dashboard')}
                     size="lg" 
                     className="bg-yellow-400 text-blue-900 hover:bg-yellow-300 text-lg sm:text-xl px-6 sm:px-8 py-3 sm:py-4 font-bold shadow-lg w-full sm:w-auto"
                   >
                     Get Started
                   </Button>
-                </SignUpButton>
+                
                 <Button 
                   variant="outline" 
                   size="lg" 
