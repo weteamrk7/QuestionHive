@@ -1,10 +1,11 @@
 import axios from "axios";
 
+let url = import.meta.env.VITE_BACKEND_URL;
 export async function getChapters(data){
 
     console.log(data);
     try {
-        let chapters = await axios.get(`http://localhost:7896/api/question/getChapters?subject=${data.subject}&category=${data.category}`);
+        let chapters = await axios.get(`${url}/api/question/getChapters?subject=${data.subject}&category=${data.category}`);
 
         
 

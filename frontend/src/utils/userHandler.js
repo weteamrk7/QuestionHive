@@ -1,13 +1,13 @@
 import axios from 'axios';
 import { useAuth } from '../context/userContext';
 
-
+let url = import.meta.env.VITE_BACKEND_URL;
 export async function getUser(){
 
 
     
     try {
-        let user = await axios.get('http://localhost:7896/api/auth/getuser', {
+        let user = await axios.get(`${url}/api/auth/getuser`, {
             withCredentials : true,
         });
         return user.data.user;
@@ -23,7 +23,7 @@ export async function getAllUser(){
 
     
     try {
-        let users = await axios.get('http://localhost:7896/api/users', {
+        let users = await axios.get(`${url}/api/users`, {
             withCredentials : true,
         });
         return users.data;
@@ -38,7 +38,7 @@ export async function registerUser(data){
 
     console.log(data);
     try {
-        let user = await axios.post('http://localhost:7896/api/auth/register',data, {
+        let user = await axios.post(`${url}/api/auth/register`,data, {
             withCredentials : true,
         });
 
@@ -54,7 +54,7 @@ export async function loginUser(data){
     
     console.log(data);
     try {
-        let user = await axios.post('http://localhost:7896/api/auth/login', data,{
+        let user = await axios.post(`${url}/api/auth/login`, data,{
             withCredentials : true,    
         });
         
@@ -71,7 +71,7 @@ export async function logoutUser(){
     
     
     try {
-        let user = await axios.get('http://localhost:7896/api/auth/logout', {
+        let user = await axios.get(`${url}/api/auth/logout`, {
             withCredentials : true
         });
         console.log("logout success", user)
@@ -89,7 +89,7 @@ export async function updateCredits(qty, sign,coupon){
 
  
     try {
-        let res = await axios.post('http://localhost:7896/api/user/update-credits', {qty,sign,coupon},{
+        let res = await axios.post(`${url}/api/user/update-credits`, {qty,sign,coupon},{
             withCredentials : true,    
         });
         
@@ -110,7 +110,7 @@ export async function initiatePayment(amount){
  
     try {
       
-        const response = await fetch(`http://localhost:7896/api/payment/${'Stripe'}`, {
+        const response = await fetch(`${url}/api/payment/${'Stripe'}`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ amount }),
@@ -130,7 +130,7 @@ export async function forgotPassword(email){
 
     try {
       
-        const response = await axios.post('http://localhost:7896/api/user/forgot-password',{email}, {
+        const response = await axios.post(`${url}/api/user/forgot-password`,{email}, {
             withCredentials : true,
         });
   

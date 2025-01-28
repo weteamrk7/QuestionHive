@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import axios from "axios";
 
+
 const AddQuestions = () => {
+  let url = import.meta.env.VITE_BACKEND_URL;
   const [questionData, setQuestionData] = useState({
     difficulty: "",
     category: "",
@@ -31,7 +33,7 @@ const AddQuestions = () => {
     setLoading(true); 
     try {
       const response = await axios.post(
-        "http://localhost:3000/api/question/add-question",
+        `${url}/api/question/add-question`,
         questionData
       );
       setMessage(response.data.message || "Question added successfully!");

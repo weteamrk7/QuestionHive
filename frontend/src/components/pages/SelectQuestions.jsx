@@ -20,7 +20,7 @@ function useQuery() {
 
 function SelectQuestions() {
   console.log("Rendering SelectQuestions component");
-
+  let url = import.meta.env.VITE_BACKEND_URL;
   const query = useQuery();
   const exam = query.get('exam');
   const subject = query.get('subject');
@@ -48,7 +48,7 @@ function SelectQuestions() {
   const fetchQuestions = async() => {
  
     try{
-      const response = await axios.get(`http://localhost:7896/api/question/getQuestions?subject=${subject}&category=${exam}&chapter=${'all'}`);
+      const response = await axios.get(`${url}/api/question/getQuestions?subject=${subject}&category=${exam}&chapter=${'all'}`);
       let questions = response.data.questions
       console.log(questions);
       setFilteredQuestions(questions);

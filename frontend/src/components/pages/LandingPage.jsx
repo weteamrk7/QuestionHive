@@ -9,6 +9,7 @@ import { Link, useNavigate } from 'react-router-dom';
 // import { useAuth, SignInButton, SignUpButton } from '@clerk/clerk-react';
 import { useAuth } from '../../context/userContext';
 
+
 const ExamManagementLandingPage = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
