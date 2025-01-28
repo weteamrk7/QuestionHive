@@ -11,6 +11,8 @@ import authRouter from "./routes/Auth.js";
 import paymentRouter from "./routes/Payment.js";
 import { configDotenv } from "dotenv";
 import cookieParser from "cookie-parser";
+import dotenv from 'dotenv';
+dotenv.config();
 
 configDotenv();
 // import bodyParser from "body-parser";
@@ -21,7 +23,7 @@ app.use(express.json());
 app.use(cookieParser());
 const PORT = process.env.PORT || 5000;
 app.use(cors({
-    origin: "http://localhost:5173", // Frontend URL
+    origin: process.env.CLIENT_URL, // Frontend URL
     credentials: true, // Allow credentials (cookies)
 }));
 
@@ -63,7 +65,14 @@ app.use("/api/auth", authRouter);
 app.use("/api/user", userRouter);
 app.use("/api/payment", paymentRouter);
 
-app.listen(PORT, () => {
-  connectDb();
-  console.log(`Server is running on http://localhost:${PORT}`);
-});
+connectDb()
+.then(()=>{
+  app.listen(PORT, () => {
+  
+    console.log(`Server is running on http://localhost:${PORT}`);
+  });
+  
+})
+.catch((e)=>{
+  console.log(e);
+})
