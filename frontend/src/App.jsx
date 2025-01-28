@@ -10,13 +10,14 @@ import CreateExam from './components/pages/CreateExam';
 import SelectQuestions from './components/pages/SelectQuestions';
 import AddedQuestions from './components/pages/AddedQuestions';
 import Preview from './components/pages/Preview';
-import AddQuestions from './components/adminPages/addQuestions';
+// import  from './components/adminPages/addQuestions';
 import {useAuth} from './context/userContext';
 import Cheakout from './components/payments/Cheakout';
 import Success from './components/payments/Success';
 import Failure from './components/payments/Failure';
 import PasswordRecoveryForm from './components/pages/ForgotPassword';
 import { ToastContainer } from 'react-toastify';
+// import AddQuestions from './components/adminPages/AddQuestions';
 
 
 function App() {
@@ -56,7 +57,7 @@ useEffect(() => {
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<SignUpPage />} />
           <Route path="/forgot-password" element={<PasswordRecoveryForm />} />
-          <Route path="/addQuestionToDatabase" element={<AddQuestions />} />
+          {/* <Route path="/addQuestionToDatabase" element={<AddQuestions />} /> */}
           <Route path="/cheakout" element={<Cheakout />} />
           <Route path="/success" element={<Success />} />
           <Route path="/failure" element={<Failure />} />
