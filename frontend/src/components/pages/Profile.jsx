@@ -7,7 +7,7 @@ import { Card, CardHeader, CardContent, CardFooter } from "@/components/ui/card"
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { Separator } from "@/components/ui/separator";
 import { Skeleton } from "@/components/ui/skeleton";
-import { User, Mail, Calendar, Shield, LogOut,MessageCircleHeart } from 'lucide-react';
+import { User, Mail, Calendar, Shield, LogOut,MessageCircleHeart, ArrowLeft } from 'lucide-react';
 import { useAuth } from '@/context/userContext';
 import { updateCredits } from '@/utils/userHandler';
 
@@ -59,7 +59,8 @@ const Profile = () => {
         transition={{ duration: 0.5 }}
       >
         <Card className="bg-white shadow-lg hover:shadow-xl transition-shadow duration-300">
-          <CardHeader className="text-center bg-gradient-to-r from-blue-600 to-blue-800 text-white py-8 rounded-t-lg">
+          <CardHeader className="text-center relative bg-gradient-to-r from-blue-600 to-blue-800 text-white py-8 rounded-t-lg">
+            <button onClick={()=>navigate('/')} className='absolute left-4 top-4 text-xl hover:text-gray-400'> <ArrowLeft /> </button>            
             <Avatar className="w-32 h-32 mx-auto mb-4 border-4 border-white shadow-lg">
               <AvatarImage src={user.imageUrl} alt={user.name} />
               <AvatarFallback className="bg-blue-500 text-white text-2xl">{user.name.charAt(0)}</AvatarFallback>
@@ -88,7 +89,7 @@ const Profile = () => {
               onClick={handleLogout}
               className="bg-red-600 hover:bg-red-700 text-white transition-colors duration-300"
             >
-              <LogOut className="mr-2 h-4 w-4" />
+              {/* <LogOut className="mr-2 h-4 w-4" /> */}
               Logout
             </Button>
           </CardFooter>

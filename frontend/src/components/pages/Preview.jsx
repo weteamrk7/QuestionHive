@@ -3,6 +3,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Document, Page, Text, View, StyleSheet, pdf, Font, PDFViewer } from '@react-pdf/renderer';
 import { useAuth } from '@/context/userContext';
 import { updateCredits } from '@/utils/userHandler';
+import { ArrowLeft } from 'lucide-react';
 
 Font.register({
   family: 'Arial',
@@ -295,7 +296,7 @@ const Preview = () => {
             to={'/'}
              className="w-full sm:w-auto inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-gray-600 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-white-500"
           >
-            &lt;- Go Home
+            <ArrowLeft className='mr-2 text-sm'/> Go Home
           </Link>
         </div>
       </div>

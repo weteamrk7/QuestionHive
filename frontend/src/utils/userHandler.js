@@ -126,4 +126,25 @@ export async function initiatePayment(amount){
 
 }
 
+export async function forgotPassword(email){
+
+    try {
+      
+        const response = await axios.post('http://localhost:7896/api/user/forgot-password',{email}, {
+            withCredentials : true,
+        });
+  
+    //   const data = await response.json();
+        
+      console.log(response);
+      return response?.data?.otp;
+
+    } catch (e) {
+        console.log(e?.message);
+        return null;
+    }
+
+}
+
+
 

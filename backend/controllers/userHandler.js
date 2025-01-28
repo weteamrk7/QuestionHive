@@ -1,6 +1,9 @@
 import bcrypt from "bcryptjs";
 import User from '../models/user.js';
 import generateTokenAndSetCookie from "../utils/generateToken.js";
+import { Resend } from 'resend';
+import crypto from 'crypto';
+
 
 const signup = async (req, res) => {
   try {
@@ -58,6 +61,85 @@ const login = async (req, res) => {
     res.status(500).json({ message: "Error logging in.", error: error.message });
   }
 };
+
+const OTPStore = new Map(); 
+
+const resend = new Resend(process.env.RESEND_API_KEY); // Resend API key
+
+
+const sendOTPEmail = async (email, otp) => {
+  await resend.emails.send({
+    from: 'Question Hive <no-reply@amazon.com>',
+    to: email,
+    subject: 'Password Reset OTP',
+    html: `<p>Your OTP for password reset is: <strong>${otp}</strong></p>`,
+  });
+};
+
+const forgotPassword = async (req, res) => {
+  try {
+    const { email } = req.body;
+   
+
+    const user = await User.findOne({ email });
+    
+    if (!user) {
+      return res.status(500).json({ message: 'User not found.' ,user});
+    }
+
+    // Generate OTP
+    const otp = crypto.randomInt(1000, 9999).toString();
+
+    // Store OTP with expiry (5 minutes)
+    OTPStore.set(email, { otp, expiresAt: Date.now() + 5 * 60 * 1000 });
+
+    // Send OTP using Resend
+    await sendOTPEmail(email, otp);
+
+    res.status(200).json({ message: 'OTP sent successfully.', otp });
+  } catch (error) {
+    res.status(500).json({ message: 'Error sending OTP.', error: error.message });
+  }
+};
+
+const resetPassword = async (req, res) => {
+  try {
+    const { email, otp, newPassword } = req.body;
+
+    const storedOTP = OTPStore.get(email);
+
+    if (!storedOTP) {
+      return res.status(400).json({ message: 'No OTP found for this email.' });
+    }
+
+    if (storedOTP.otp !== otp) {
+      return res.status(400).json({ message: 'Invalid OTP.' });
+    }
+
+    if (Date.now() > storedOTP.expiresAt) {
+      return res.status(400).json({ message: 'OTP has expired.' });
+    }
+
+    // Update user's password
+    const user = await User.findOne({ email });
+    if (!user) {
+      return res.status(404).json({ message: 'User not found.' });
+    }
+
+    user.password = newPassword; // Ensure this is hashed if using hashed passwords
+    await user.save();
+
+    // Clear the OTP
+    OTPStore.delete(email);
+
+    res.status(200).json({ message: 'Password reset successfully.' });
+  } catch (error) {
+    res.status(500).json({ message: 'Error resetting password.', error: error.message });
+  }
+};
+
+
+
 
 const logout = async (req, res) => {
   
@@ -127,4 +209,4 @@ const updateCredits = async (req, res) => {
   }
 };
 
-export { signup, login, logout ,getUser,updateCredits };
+export { signup, login, logout ,getUser,updateCredits,forgotPassword, resetPassword };
