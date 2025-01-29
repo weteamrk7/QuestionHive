@@ -12,6 +12,7 @@ import { KCETQuestions } from "@/assets/Questions/KCETQuestions";
 import { EleventhQuestions } from "@/assets/Questions/11thQuestions";
 import { TwelfthQuestions } from "@/assets/Questions/12thQuestions";
 import axios from 'axios';
+import { useAuth } from '@/context/userContext';
 
 
 function useQuery() {
@@ -19,9 +20,13 @@ function useQuery() {
 }
 
 function SelectQuestions() {
+
+
+
   console.log("Rendering SelectQuestions component");
   let url = import.meta.env.VITE_BACKEND_URL;
   const query = useQuery();
+  const {loadUser} = useAuth();
   const exam = query.get('exam');
   const subject = query.get('subject');
   const chapters = query.get('chapters').split(',');
@@ -98,6 +103,7 @@ function SelectQuestions() {
   };
 
   fetchQuestions();
+ 
  },[])
   // Cache selected questions whenever they change
   useEffect(() => {

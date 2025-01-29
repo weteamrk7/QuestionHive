@@ -1,6 +1,7 @@
 import { useAuth } from "@/context/userContext";
 import React, { useEffect, useState } from "react";
 import { useNavigate , Link } from 'react-router-dom';
+import {  toast } from 'react-toastify';
 
 const LoginPage = () => {
   const [formData, setFormData] = useState({
@@ -44,8 +45,14 @@ const LoginPage = () => {
       setLoading(true);
       try {
         console.log("Form Data:", formData);
-        await login(formData);
-        navigate('/');
+        let res = await login(formData);
+        if(res)
+          {
+            navigate('/');
+          }
+          else{
+            toast.error('Invalid Credentials!');
+          }
         setErrors({});
       } catch (error) {
         console.log("unable to login", error);

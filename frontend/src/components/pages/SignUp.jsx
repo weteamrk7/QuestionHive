@@ -1,7 +1,7 @@
 import { useAuth } from "@/context/userContext";
 import React, { useEffect, useState } from "react";
 import { useNavigate , Link } from 'react-router-dom';
-
+import {  toast } from 'react-toastify';
 
 
 
@@ -58,7 +58,13 @@ const SignUpPage = () => {
       try {
         console.log("Form Submitted:", formData);
         let res = await signup(formData);
-        navigate('/');
+        if(res)
+        {
+          navigate('/');
+        }
+        else{
+          toast.error('Invalid Credentials!');
+        }
         setErrors({});
       } catch (error) {
         console.log("unable to create user.", error);

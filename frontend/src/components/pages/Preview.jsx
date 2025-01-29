@@ -4,6 +4,7 @@ import { Document, Page, Text, View, StyleSheet, pdf, Font, PDFViewer } from '@r
 import { useAuth } from '@/context/userContext';
 import { updateCredits } from '@/utils/userHandler';
 import { ArrowLeft } from 'lucide-react';
+import { toast } from 'react-toastify';
 
 Font.register({
   family: 'Arial',
@@ -17,6 +18,11 @@ const styles = StyleSheet.create({
     padding: 20, // Reduced padding for mobile
     fontFamily: 'Times-Roman',
   },
+  content: (layout) => ({
+    flexDirection: layout === 'horizontal' ? 'row' : 'column',
+    flexWrap: 'wrap',
+    justifyContent: layout === 'horizontal' ? 'space-between' : 'flex-start',
+  }),
   header: {
     marginBottom: 10,
     marginTop: -10,
@@ -85,8 +91,9 @@ const styles = StyleSheet.create({
   },
 });
 
-const PDFDocument = ({ formData, selectedQuestions }) => {
+const PDFDocument = ({ formData,   questions , layout, showAnswers }) => {
 
+  console.log(formData, questions, layout,showAnswers)
   
  
   const questionsPerPage = [];
@@ -110,9 +117,9 @@ const PDFDocument = ({ formData, selectedQuestions }) => {
   };
 
   // Add questions to pages
-  selectedQuestions.forEach((question, index) => {
-    addQuestionToPage(question, index === 0);
-  });
+  // selectedQuestions.forEach((question, index) => {
+  //   addQuestionToPage(question, index === 0);
+  // });
 
   // Add any remaining questions
   if (currentPage.length > 0) {
@@ -121,7 +128,62 @@ const PDFDocument = ({ formData, selectedQuestions }) => {
 
 
   return (
-    <Document>
+   <>
+  <Document>
+    <Page size="A4" style={styles.page}>
+      {/* Watermark on every page */}
+      {formData.watermark && (
+        <Text
+          style={{
+            position: 'absolute',
+            fontSize: 48,
+            color: 'rgba(0, 0, 0, 0.1)',
+            transform: 'rotate(-45deg)',
+            left: '30%',
+            top: '40%',
+            zIndex: -1,
+          }}
+        >
+          {formData.watermark}
+        </Text>
+      )}
+
+      {/* Header */}
+      <View style={{ marginBottom: 20 }}>
+        <Text style={{ fontSize: 16, fontWeight: 'bold', textAlign: 'center' }}>
+          {formData.schoolName}
+        </Text>
+        <Text style={{ fontSize: 12, textAlign: 'center' }}>Subject: {formData.subject}</Text>
+        <Text style={{ fontSize: 12, textAlign: 'center' }}>Date: {formData.date}</Text>
+      </View>
+
+      {/* Questions */}
+      <View style={styles.content(layout)}>
+        {questions.map((question, index) => (
+          <View key={question.id} style={styles.questionSection}>
+            <Text style={styles.questionText}>
+              {index + 1}. {question.text}
+            </Text>
+            {question.options &&
+              question.options.map((opt, i) => (
+                <Text key={i} style={styles.option}>
+                  {String.fromCharCode(65 + i)}) {opt}
+                </Text>
+              ))}
+            {showAnswers && (
+              <Text style={{ fontSize: 10, color: 'green' }}>
+                Answer: {question.answer}
+              </Text>
+            )}
+          </View>
+        ))}
+      </View>
+
+      <Text style={styles.footer}>End of Page</Text>
+    </Page>
+  </Document>
+   {/* previous */}
+   {/* <Document>
       {questionsPerPage.map((pageQuestions, pageIndex) => (
         <Page key={pageIndex} size="A4" style={styles.page}>
           <View style={styles.watermark} fixed>
@@ -158,7 +220,8 @@ const PDFDocument = ({ formData, selectedQuestions }) => {
           <Text style={styles.footer} fixed>Page {pageIndex + 1} of {questionsPerPage.length}</Text>
         </Page>
       ))}
-    </Document>
+    </Document> */}
+   </>
   );
 };
 
@@ -168,6 +231,9 @@ const Preview = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const { selectedQuestions } = location.state || { selectedQuestions: [] };
+  // const { selectedQuestions = [] } = location.state || {};
+
+  const [layout, setLayout] = useState('vertical');
   const [formData, setFormData] = useState({
     schoolName: '',
     subject: '',
@@ -179,40 +245,77 @@ const Preview = () => {
   const handleInputChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
+  // useEffect(()=>{
+  //   loadUser();
+  // },[])
 
-  const handleExportPDF = async () => {
+  const handleExportPDFs = async () => {
+
     await loadUser();
 
     console.log(user, user.serviceCount);
+    const questionOnlyBlob = await pdf(
+      <PDFDocument
+        questions={selectedQuestions}
+        layout={layout}
+        showAnswers={false}
+        formData={formData}
+      />
+    ).toBlob();
+
+    const withAnswersBlob = await pdf(
+      <PDFDocument
+        questions={selectedQuestions}
+        layout={layout}
+        showAnswers={true}
+        formData={formData}
+      />
+    ).toBlob();
+
+    const downloadPDF = (blob, filename) => {
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = filename;
+      link.click();
+      URL.revokeObjectURL(url);
+    };
 
     if(user.serviceCount > 0)
     {
+
+   
+      downloadPDF(questionOnlyBlob, 'questions_only.pdf');
+      downloadPDF(withAnswersBlob, 'questions_with_answers.pdf');
+              // Show animation
+              setShowAnimation(true);
+
+              try {
+                loadUser();
+                await updateCredits(1,0)  ;
+              } catch (error) {
+                console.log('credits not reduced properly.');
+              }
+              
+              toast.success('Pdf Created Successfully!');
+              // Redirect after 3 seconds
+              setTimeout(() => {
+                navigate('/dashboard');
+              }, 3000);
       
-        const blob = await pdf(<PDFDocument formData={formData} selectedQuestions={selectedQuestions} />).toBlob();
-        const url = URL.createObjectURL(blob);
-        const link = document.createElement('a');
-        link.href = url;
-        link.download = 'question_paper.pdf';
-        link.click();
-        URL.revokeObjectURL(url);
+        // const blob = await pdf(<PDFDocument formData={formData} selectedQuestions={selectedQuestions} />).toBlob();
+        // const url = URL.createObjectURL(blob);
+        // const link = document.createElement('a');
+        // link.href = url;
+        // link.download = 'question_paper.pdf';
+        // link.click();
+        // URL.revokeObjectURL(url);
 
-        // Show animation
-        setShowAnimation(true);
 
-        try {
-          await updateCredits(1,0)  ;
-        } catch (error) {
-          console.log('credits not reduced properly.');
-        }
-
-        // Redirect after 3 seconds
-        setTimeout(() => {
-          // navigate('/dashboard');
-        }, 3000);
 
     }
     else{
-      alert("You do not have Credits to create PDF's! Please purchase some to continue.")
+      toast.error("You do not have Credits to create PDF's! Please purchase some to continue.")
     }
   };
 
@@ -268,19 +371,73 @@ const Preview = () => {
         <div className="mb-6 sm:mb-8 text-center ">
          
           <button
-            onClick={handleExportPDF}
+            onClick={handleExportPDFs}
             className="w-full sm:w-auto inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
           >
             Export PDF
           </button>
         </div>
 
+
+        
+        {/* Layout Selection */}
+        <div className="my-4">
+          <label className="mr-4">
+            <input
+              type="radio"
+              name="layout"
+              value="vertical"
+              checked={layout === 'vertical'}
+              onChange={() => setLayout('vertical')}
+            />
+            Vertical Layout
+          </label>
+          <label className="ml-4">
+            <input
+              type="radio"
+              name="layout"
+              value="horizontal"
+              checked={layout === 'horizontal'}
+              onChange={() => setLayout('horizontal')}
+            />
+            Horizontal Layout
+          </label>
+        </div>
+
         {/* PDF Preview */}
-        <div className="bg-white shadow-lg rounded-lg overflow-hidden">
+        {/* <div className="bg-white shadow-lg rounded-lg overflow-hidden">
           <PDFViewer width="100%" height="400px" showToolbar={false}>
             <PDFDocument formData={formData} selectedQuestions={selectedQuestions} />
           </PDFViewer>
+        </div> */}
+
+          {/* PDF Viewers */}
+          <div className="grid grid-cols-2 gap-4">
+          <div className="bg-white shadow-lg rounded-lg overflow-hidden">
+            <h2 className="text-center font-semibold py-2">Questions Only</h2>
+            <PDFViewer width="100%" height="400px" showToolbar={false}>
+              <PDFDocument
+                questions={selectedQuestions}
+                layout={layout}
+                showAnswers={false}
+                formData={formData}
+              />
+            </PDFViewer>
+          </div>
+
+          <div className="bg-white shadow-lg rounded-lg overflow-hidden">
+            <h2 className="text-center font-semibold py-2">Questions with Answers</h2>
+            <PDFViewer width="100%" height="400px" showToolbar={false}>
+              <PDFDocument
+                questions={selectedQuestions}
+                layout={layout}
+                showAnswers={true}
+                formData={formData}
+              />
+            </PDFViewer>
+          </div>
         </div>
+
 
         {/* Animation overlay */}
         {showAnimation && (

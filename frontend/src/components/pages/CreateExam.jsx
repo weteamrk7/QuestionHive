@@ -12,6 +12,7 @@ import { KCETQuestions } from "@/assets/Questions/KCETQuestions";
 import { EleventhQuestions } from "@/assets/Questions/11thQuestions";
 import { TwelfthQuestions } from "@/assets/Questions/12thQuestions";
 import { getChapters } from '@/utils/questionHandler';
+import { useAuth } from '@/context/userContext';
 
 function CreateExam() {
   
@@ -33,6 +34,7 @@ function CreateExam() {
   const [selectedChapters, setSelectedChapters] = useState([]);
   const [chapters, setChapters] = useState(selectedSubject ? Object.keys(getQuestions()[selectedSubject] || {}) : []);
   // const [chapters, setChapters] = useState([]);
+  const {  loadUser } = useAuth();
   const navigate = useNavigate();
 
   const handleExamSelect = (exam) => {
@@ -61,6 +63,7 @@ function CreateExam() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    loadUser();
     navigate(`/questions?exam=${selectedExam}&subject=${selectedSubject}&chapters=${selectedChapters.join(',')}`);
   };
   

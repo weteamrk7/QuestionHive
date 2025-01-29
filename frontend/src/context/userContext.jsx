@@ -11,52 +11,61 @@ export const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(false);
 
   const login = async (userData) => {
-    try {
+    
       let res = await loginUser(userData);
-      setUser(res);
-      setIsAuthenticated(true);
-      return true;
-    } catch (e) {
-      console.log(e);
-      return false;
-    }
+      if(res)
+      {
+        setUser(res);
+        setIsAuthenticated(true);
+        return true;
+      }
+      else{
+        setIsAuthenticated(false);
+        return false;
+      }
+      
+   
   };
   const signup = async (userData) => {
-    try {
+  
       let res = await registerUser(userData);
       console.log(res);
-      setUser(res);
-      setIsAuthenticated(true);
-      return true;
-    } catch (e) {
-      console.log(e);
-      return false;
-    }
+      if(res)
+      {
+        setUser(res);
+        setIsAuthenticated(true);
+        return true;
+      }
+      else{
+        setIsAuthenticated(false);
+        return false;
+      }
+    
   };
   const loadUser = async () => {
-    try {
+  
       setLoading(true); // Begin loading state
       let res = await getUser(); // Fetch user data
       console.log("User from loadUser: ", res);
-      setUser(res);
-      setIsAuthenticated(!!res); // Update authentication state
-    } catch (error) {
-      console.error("Error loading user: ", error);
-      setIsAuthenticated(false);
-    } finally {
+      if(res)
+      {
+        setUser(res);
+        setIsAuthenticated(true); // Update authentication state
+      }
+      else{
+        setIsAuthenticated(false);
+      }
+    
       setLoading(false); // End loading state
-    }
+    
   };
   const logout = async() => {
-    try {
+    
       await logoutUser();
       setUser(null);
       setIsAuthenticated(false);
       return true;
-    } catch (e) {
-      console.log(e);
-      return false;
-    }
+    
 
   };
 

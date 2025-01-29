@@ -1,6 +1,7 @@
 import React,{useEffect} from 'react';
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 // import { useAuth, ClerkLoaded, ClerkLoading } from '@clerk/clerk-react';
+
 import ExamManagementLandingPage from './components/pages/LandingPage';
 import Login from './components/pages/Login';
 import SignUpPage from './components/pages/SignUp';
@@ -69,9 +70,9 @@ useEffect(() => {
           <Route path="/addedQuestions" element={<ProtectedRoute><AddedQuestions /></ProtectedRoute>} />
           <Route path="/preview" element={<ProtectedRoute><Preview /></ProtectedRoute>} />
         </Routes>
-        <ToastContainer/>
+      <ToastContainer position="top-center" /> 
+    
       </Router>
-    {/* </ClerkLoaded> */}
     </>
   );
 }
