@@ -63,7 +63,7 @@ function CreateExam() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    loadUser();
+    // loadUser();
     navigate(`/questions?exam=${selectedExam}&subject=${selectedSubject}&chapters=${selectedChapters.join(',')}`);
   };
   
