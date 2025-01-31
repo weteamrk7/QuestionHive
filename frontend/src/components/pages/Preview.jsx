@@ -9,6 +9,7 @@ import {
   pdf,
   Font,
   PDFViewer,
+  Image
 } from "@react-pdf/renderer";
 import { useAuth } from "@/context/userContext";
 import { updateCredits } from "@/utils/userHandler";
@@ -189,8 +190,9 @@ const PDFDocument = ({ formData, questions, layout, showAnswers }) => {
     {/* Show Image if available, else show question text */}
     {question.image ? (
       <Image
-        source={{ uri: question.image }}
+        source={{ uri: `question_img.jpg` }}
         style={styles.questionImage}
+        
         resizeMode="contain"
       />
     ) : (
