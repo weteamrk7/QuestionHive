@@ -28,38 +28,6 @@ app.use(cors({
 }));
 
 
-
-
-
-// app.get("/api/questions", (req, res) => {
-//     const { category, subject, chapter } = req.query;
-    
-//     let filteredQuestions = questions;
-  
-//     if (category) {
-//       filteredQuestions = filteredQuestions.filter(q => q.category === category);
-//     }
-//     if (subject) {
-//       filteredQuestions = filteredQuestions.filter(q => q.subject === subject);
-//     }
-//     if (chapter) {
-//       filteredQuestions = filteredQuestions.filter(q => q.chapter === `Chapter ${chapter}`);
-//     }
-  
-//     res.json(filteredQuestions);
-//   });
-// // Endpoint to get question by serial number
-// app.get("/api/questions/:serial_no",(req, res) => {
-//   const serialNo = parseInt(req.params.serial_no, 10);
-//   const question = questions.find(q => q.serial_no === serialNo);
-
-//   if (question) {
-//     res.json(question);
-//   } else { 
-//     res.status(404).json({ message: "Question not found" });
-//   }
-// });
-
 app.use("/api/question", questionRouter);
 app.use("/api/auth", authRouter);
 app.use("/api/user", userRouter);

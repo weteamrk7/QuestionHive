@@ -3,6 +3,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import { Trash2 } from "lucide-react"; 
 import { ShoppingCart, GraduationCap, BookOpen, Filter, Check, ChevronRight, ChevronLeft, Menu } from 'lucide-react';
 
 // Import your question sets
@@ -12,12 +13,16 @@ import { KCETQuestions } from "@/assets/Questions/KCETQuestions";
 import { EleventhQuestions } from "@/assets/Questions/11thQuestions";
 import { TwelfthQuestions } from "@/assets/Questions/12thQuestions";
 import axios from 'axios';
+import { toast } from 'react-toastify';
 import { useAuth } from '@/context/userContext';
-
+let backend_url = import.meta.env.VITE_BACKEND_URL;
 
 function useQuery() {
   return new URLSearchParams(useLocation().search);
 }
+
+
+
 
 function SelectQuestions() {
 
@@ -26,7 +31,7 @@ function SelectQuestions() {
   console.log("Rendering SelectQuestions component");
   let url = import.meta.env.VITE_BACKEND_URL;
   const query = useQuery();
-  const {loadUser} = useAuth();
+  const {loadUser , user} = useAuth();
   const exam = query.get('exam');
   const subject = query.get('subject');
   const chapters = query.get('chapters').split(',');
@@ -36,6 +41,7 @@ function SelectQuestions() {
   const [difficultyFilter, setDifficultyFilter] = useState('all');
   const [chapterFilter, setChapterFilter] = useState('all');
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+   console.log("user" , user)
 
   // Load cached selected questions or initialize empty array
   const [selectedQuestions, setSelectedQuestions] = useState(() => {
@@ -184,6 +190,16 @@ function SelectQuestions() {
     applyFilters();
   }, [questions, difficultyFilter, chapterFilter]);
 
+
+  const handleDelete = async (id) => {
+    try {
+      await axios.post(`${backend_url}/api/question/delete-question/${id}`); // Make delete request
+      toast.success("Question deleted successfully!");
+      setFilteredQuestions(filteredQuestions.filter(q => q._id !== id));
+    } catch (error) {
+      toast.error("Error deleting question.");
+    }
+  };
   const handleGoBack = () => {
     navigate(-1);
   };
@@ -291,82 +307,93 @@ function SelectQuestions() {
           </div>
         </div>
 
-        <div className="bg-white shadow-sm rounded-lg overflow-hidden">
-          <div className="overflow-x-auto">
-            <table className="w-full">
-              <thead className="bg-gray-50">
-                <tr>
-                  <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Select</th>
-                  <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Question</th>
-                  <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Difficulty</th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-gray-200">
-                {filteredQuestions.map((question, index) => {
-                  const isSelected = selectedQuestions.some(item => item._id === question._id);
-                  return (
-                    <tr key={question._id} className="hover:bg-gray-50">
-                      <td className="px-4 py-4 whitespace-nowrap">
-                        <div
-                          className={`w-5 h-5 rounded-md border-2 flex items-center justify-center cursor-pointer ${
-                            isSelected ? "bg-indigo-600 border-indigo-600" : "border-gray-300"
-                          }`}
-                          onClick={() => toggleCart(question)}
-                        >
-                          {isSelected && <Check className="w-3 h-3 text-white" />}
-                        </div>
-                      </td>
-                      <td className="px-4 py-4">
-                        {question.image ? (
-                          <div className="mb-2 ">
-                            <img
-                              src={question.image}
-                              alt="Question"
-                              className="max-h-32 w-auto object-contain rounded-md shadow-sm"
-                            />
-                          </div>
-                        ) : (
-                          <div className="text-sm text-gray-900 font-medium mb-2">{question.question}</div>
-                        )}
-                        
-                        {question.options && (
-                          <ul className="space-y-1">
-                            {question.options.map((option, i) => (
-                              <li key={i} className="text-sm text-gray-600 flex">
-                                <span className="font-medium mr-2">{String.fromCharCode(65 + i)}.</span>
-                                <span>{option}</span>
-                              </li>
-                            ))}
-                          </ul>
-                        )}
-                        
-                        {question.answer && (
-                          <div className="mt-2 text-sm font-medium text-green-600">
-                            Answer: {question.answer}
-                          </div>
-                        )}
-                      </td>
-                      <td className="px-4 py-4 whitespace-nowrap">
-                        <span
-                          className={`px-2 py-1 inline-flex text-xs leading-5 font-semibold rounded-full ${
-                            question.difficulty === "easy"
-                              ? "bg-green-100 text-green-800"
-                              : question.difficulty === "medium"
-                              ? "bg-yellow-100 text-yellow-800"
-                              : "bg-red-100 text-red-800"
-                          }`}
-                        >
-                          {question.difficulty}
-                        </span>
-                      </td>
-                    </tr>
-                  );
-                  
-                })}
-              </tbody>
-            </table>
-          </div>
-        </div>
+      
+
+<div className="bg-white shadow-sm rounded-lg overflow-hidden">
+  <div className="overflow-x-auto">
+    <table className="w-full">
+      <thead className="bg-gray-50">
+        <tr>
+          <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Select</th>
+          <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Question</th>
+          <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Difficulty</th>
+          {user.isAdmin && <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Delete</th> }
+        </tr>
+      </thead>
+      <tbody className="divide-y divide-gray-200">
+        {filteredQuestions.map((question, index) => {
+          const isSelected = selectedQuestions.some(item => item._id === question._id);
+          return (
+            <tr key={question._id} className="hover:bg-gray-50">
+              <td className="px-4 py-4 whitespace-nowrap">
+                <div
+                  className={`w-5 h-5 rounded-md border-2 flex items-center justify-center cursor-pointer ${
+                    isSelected ? "bg-indigo-600 border-indigo-600" : "border-gray-300"
+                  }`}
+                  onClick={() => toggleCart(question)}
+                >
+                  {isSelected && <Check className="w-3 h-3 text-white" />}
+                </div>
+              </td>
+              <td className="px-4 py-4">
+                {question.image ? (
+                  <div className="mb-2 ">
+                    <img
+                      src={question.image}
+                      alt="Question"
+                      className="max-h-32 w-auto object-contain rounded-md shadow-sm"
+                    />
+                  </div>
+                ) : (
+                  <div className="text-sm text-gray-900 font-medium mb-2">{question.question}</div>
+                )}
+                
+                {question.options && (
+                  <ul className="space-y-1">
+                    {question.options.map((option, i) => (
+                      <li key={i} className="text-sm text-gray-600 flex">
+                        <span className="font-medium mr-2">{String.fromCharCode(65 + i)}.</span>
+                        <span>{option}</span>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+                
+                {question.answer && (
+                  <div className="mt-2 text-sm font-medium text-green-600">
+                    Answer: {question.answer}
+                  </div>
+                )}
+              </td>
+              <td className="px-4 py-4 whitespace-nowrap">
+                <span
+                  className={`px-2 py-1 inline-flex text-xs leading-5 font-semibold rounded-full ${
+                    question.difficulty === "easy"
+                      ? "bg-green-100 text-green-800"
+                      : question.difficulty === "medium"
+                      ? "bg-yellow-100 text-yellow-800"
+                      : "bg-red-100 text-red-800"
+                  }`}
+                >
+                  {question.difficulty}
+                </span>
+              </td>
+              {user.isAdmin && <td className="px-4 py-4 whitespace-nowrap">
+                <button 
+                  onClick={() => handleDelete(question._id)} 
+                  className="text-red-600 hover:text-red-800 transition"
+                >
+                  <Trash2 className="w-5 h-5" />
+                </button>
+              </td>}
+            </tr>
+          );
+        })}
+      </tbody>
+    </table>
+  </div>
+</div>
+
 
         {selectedQuestions.length > 0 && (
           <div className="fixed bottom-4 inset-x-0 px-4 sm:px-6 lg:px-8">

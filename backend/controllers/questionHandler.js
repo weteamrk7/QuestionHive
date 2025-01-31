@@ -1,7 +1,7 @@
 import Question from "../models/questions.js";
 
 export async function addMultipleQuestions(req, res){
-    const data = req.body;
+    const data = req.body.questions;
    
     try {
         
@@ -19,7 +19,7 @@ export async function addMultipleQuestions(req, res){
         res.status(200).json({
             success : true,
             error : false,
-            message : "data added successfully!",
+            message : "Questions added successfully!",
             errors
             
            })
@@ -27,7 +27,8 @@ export async function addMultipleQuestions(req, res){
         res.status(201).json({
             success : false,
             error : true,
-            message : "some internal server error occured"
+            message : "some internal server error occured",
+            e 
            })
     }
 }
@@ -86,6 +87,46 @@ export async function getQuestions(req, res){
            })
     }
 }
+
+
+export async function deleteQuestion(req, res) {
+    try {
+        const { id } = req.params;
+        
+        if (!id) {
+            return res.status(400).json({
+                success: false,
+                error: true,
+                message: "Question ID is required",
+            });
+        }
+
+        const deletedQuestion = await Question.findByIdAndDelete(id);
+
+        if (!deletedQuestion) {
+            return res.status(404).json({
+                success: false,
+                error: true,
+                message: "Question not found",
+            });
+        }
+
+        res.status(200).json({
+            success: true,
+            error: false,
+            message: "Question deleted successfully",
+            deletedQuestion,
+        });
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            error: true,
+            message: "Internal server error",
+            errorDetails: error.message,
+        });
+    }
+}
+
 export async function getChapters(req, res){
 
     

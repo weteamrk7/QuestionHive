@@ -19,6 +19,7 @@ import Failure from './components/payments/Failure';
 import PasswordRecoveryForm from './components/pages/ForgotPassword';
 import { ToastContainer } from 'react-toastify';
 import AddQuestions from './components/adminPages/AddQuestions';
+import AddMultipleQuestions from './components/adminPages/AddMultipleQuestions';
 
 
 function App() {
@@ -68,6 +69,7 @@ useEffect(() => {
           <Route path="/exam" element={<ProtectedRoute><CreateExam /></ProtectedRoute>} />
           <Route path="/questions" element={<ProtectedRoute><SelectQuestions /></ProtectedRoute>} />
           <Route path="/addedQuestions" element={<ProtectedRoute><AddedQuestions /></ProtectedRoute>} />
+          <Route path="/add-questions-json" element={<ProtectedRoute><AddMultipleQuestions /></ProtectedRoute>} />
           <Route path="/preview" element={<ProtectedRoute><Preview /></ProtectedRoute>} />
         </Routes>
       <ToastContainer position="top-center" /> 

@@ -54,6 +54,9 @@ export default function HomePage() {
         <div className="container mx-auto px-4 py-4 flex justify-between items-center">
           <h1 className="text-2xl font-bold text-blue-700 hover:text-blue-800 transition-colors duration-300">Question Hive</h1>
           <div className="flex items-center space-x-4">
+            {user.isAdmin && <button onClick={()=>{navigate('/add-questions-json')}} className='p-2 px-3 font-semibold bg-green-200 rounded-xl hover:bg-green-400 hover:text-white'>
+              Add Questions
+            </button>}
             <Button 
               variant="outline" 
               className="text-blue-600 border-blue-600 hover:bg-blue-50 transition-colors duration-300"
