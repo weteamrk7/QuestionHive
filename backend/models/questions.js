@@ -12,7 +12,11 @@ const QuestionSchema = new mongoose.Schema({
   },
   question: {
     type: String,
-    required: true,
+    default : null
+  },
+  image : {
+    type : String,
+    default : null
   },
   options: {
     type: [String], 

@@ -309,7 +309,7 @@ function SelectQuestions() {
                       <td className="px-4 py-4 whitespace-nowrap">
                         <div
                           className={`w-5 h-5 rounded-md border-2 flex items-center justify-center cursor-pointer ${
-                            isSelected ? 'bg-indigo-600 border-indigo-600' : 'border-gray-300'
+                            isSelected ? "bg-indigo-600 border-indigo-600" : "border-gray-300"
                           }`}
                           onClick={() => toggleCart(question)}
                         >
@@ -317,7 +317,18 @@ function SelectQuestions() {
                         </div>
                       </td>
                       <td className="px-4 py-4">
-                        <div className="text-sm text-gray-900 font-medium mb-2">{question.question}</div>
+                        {question.image ? (
+                          <div className="mb-2 ">
+                            <img
+                              src={question.image}
+                              alt="Question"
+                              className="max-h-32 w-auto object-contain rounded-md shadow-sm"
+                            />
+                          </div>
+                        ) : (
+                          <div className="text-sm text-gray-900 font-medium mb-2">{question.question}</div>
+                        )}
+                        
                         {question.options && (
                           <ul className="space-y-1">
                             {question.options.map((option, i) => (
@@ -328,6 +339,7 @@ function SelectQuestions() {
                             ))}
                           </ul>
                         )}
+                        
                         {question.answer && (
                           <div className="mt-2 text-sm font-medium text-green-600">
                             Answer: {question.answer}
@@ -335,16 +347,21 @@ function SelectQuestions() {
                         )}
                       </td>
                       <td className="px-4 py-4 whitespace-nowrap">
-                        <span className={`px-2 py-1 inline-flex text-xs leading-5 font-semibold rounded-full ${
-                          question.difficulty === 'easy' ? 'bg-green-100 text-green-800' :
-                          question.difficulty === 'medium' ? 'bg-yellow-100 text-yellow-800' :
-                          'bg-red-100 text-red-800'
-                        }`}>
+                        <span
+                          className={`px-2 py-1 inline-flex text-xs leading-5 font-semibold rounded-full ${
+                            question.difficulty === "easy"
+                              ? "bg-green-100 text-green-800"
+                              : question.difficulty === "medium"
+                              ? "bg-yellow-100 text-yellow-800"
+                              : "bg-red-100 text-red-800"
+                          }`}
+                        >
                           {question.difficulty}
                         </span>
                       </td>
                     </tr>
                   );
+                  
                 })}
               </tbody>
             </table>
