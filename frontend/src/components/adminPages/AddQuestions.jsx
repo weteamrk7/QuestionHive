@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
-
+import { ImagePlus, X } from "lucide-react";
 
 const AddQuestions = () => {
   let url = import.meta.env.VITE_BACKEND_URL;
@@ -8,18 +8,37 @@ const AddQuestions = () => {
     difficulty: "",
     category: "",
     question: "",
-    options: ["", "", "", ""], // Four options by default
+    questionImage: null,
+    options: ["", "", "", ""],
     answer: "",
     subject: "",
     chapter: "",
   });
 
+  const [previewImage, setPreviewImage] = useState(null);
   const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setQuestionData({ ...questionData, [name]: value });
+  };
+
+  const handleImageUpload = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      setQuestionData({ ...questionData, questionImage: file });
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setPreviewImage(reader.result);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const removeImage = () => {
+    setQuestionData({ ...questionData, questionImage: null });
+    setPreviewImage(null);
   };
 
   const handleOptionChange = (index, value) => {
@@ -30,28 +49,48 @@ const AddQuestions = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setLoading(true); 
+    setLoading(true);
+    
     try {
+      const formData = new FormData();
+      Object.keys(questionData).forEach(key => {
+        if (key === 'options') {
+          formData.append(key, JSON.stringify(questionData[key]));
+        } else if (key === 'questionImage' && questionData[key]) {
+          formData.append(key, questionData[key]);
+        } else {
+          formData.append(key, questionData[key]);
+        }
+      });
+
       const response = await axios.post(
         `${url}/api/question/add-question`,
-        questionData
+        formData,
+        {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+        }
       );
+      
       setMessage(response.data.message || "Question added successfully!");
       setQuestionData({
         difficulty: "",
         category: "",
         question: "",
+        questionImage: null,
         options: ["", "", "", ""],
         answer: "",
         subject: "",
         chapter: "",
       });
+      setPreviewImage(null);
     } catch (error) {
       setMessage(
         error.response?.data?.message || "An error occurred while adding the question."
       );
     } finally {
-      setLoading(false); // Stop loading
+      setLoading(false);
     }
   };
 
@@ -64,6 +103,46 @@ const AddQuestions = () => {
         <h2 className="text-3xl font-bold mb-6 text-center text-blue-400">
           Add a Question
         </h2>
+
+        {/* Image Upload Section */}
+        <div className="mb-6">
+          <div className="flex items-center justify-center w-full">
+            <label className="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-800 hover:bg-gray-700">
+              <div className="flex flex-col items-center justify-center pt-5 pb-6">
+                {previewImage ? (
+                  <div className="relative w-full h-full flex items-center justify-center">
+                    <img
+                      src={previewImage}
+                      alt="Question preview"
+                      className="max-h-56 max-w-full object-contain"
+                    />
+                    <button
+                      type="button"
+                      onClick={removeImage}
+                      className="absolute top-2 right-2 p-1 bg-red-500 rounded-full hover:bg-red-600"
+                    >
+                      <X className="w-5 h-5" />
+                    </button>
+                  </div>
+                ) : (
+                  <div className="flex flex-col items-center">
+                    <ImagePlus className="w-12 h-12 mb-3 text-gray-400" />
+                    <p className="mb-2 text-sm text-gray-400">
+                      <span className="font-semibold">Click to upload</span> or drag and drop
+                    </p>
+                    <p className="text-xs text-gray-400">PNG, JPG or JPEG (MAX. 800x400px)</p>
+                  </div>
+                )}
+              </div>
+              <input
+                type="file"
+                className="hidden"
+                accept="image/*"
+                onChange={handleImageUpload}
+              />
+            </label>
+          </div>
+        </div>
 
         {/* Difficulty */}
         <label className="block mb-4">
@@ -96,8 +175,8 @@ const AddQuestions = () => {
           />
         </label>
 
-          {/* Subject */}
-          <label className="block mb-4">
+        {/* Subject */}
+        <label className="block mb-4">
           <span className="text-sm font-semibold">Subject:</span>
           <input
             type="text"
@@ -124,16 +203,18 @@ const AddQuestions = () => {
           />
         </label>
 
-        {/* Question */}
+        {/* Question Text (Optional if image is present) */}
         <label className="block mb-4">
-          <span className="text-sm font-semibold">Question:</span>
+          <span className="text-sm font-semibold">
+            Question Text {previewImage && "(Optional)"}:
+          </span>
           <textarea
             name="question"
             value={questionData.question}
             onChange={handleChange}
             className="block w-full mt-2 p-3 rounded-lg bg-gray-800 text-white focus:ring-2 focus:ring-blue-500"
             placeholder="Enter question"
-            required
+            required={!previewImage}
           />
         </label>
 
@@ -167,8 +248,6 @@ const AddQuestions = () => {
             required
           />
         </label>
-
-      
 
         <button
           type="submit"

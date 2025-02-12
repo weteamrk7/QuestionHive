@@ -1,6 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
+import {Link} from 'react-router-dom';
 
 export default function AddMultipleQuestions() {
 
@@ -54,6 +55,9 @@ export default function AddMultipleQuestions() {
 
   return (
     <div className="flex justify-center items-center min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 text-white p-6">
+      <div className=" p-2 absolute z-50 top-6 right-6 hover:rounded-full bg-purple-600 text-white ">
+        <Link to={'/addQuestionToDatabase'}>Add Single Question</Link>
+      </div>      
       <div className="w-full max-w-2xl transform transition-all duration-300 hover:scale-[1.02]">
         <div className=" bg-gray-800/70 p-8 rounded-2xl shadow-2xl border border-gray-700/50 hover:border-blue-500/50 transition-all duration-300">
           <h2 className="text-2xl font-bold mb-6 bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent animate-pulse">
